@@ -1,0 +1,13 @@
+.mostrarOcultar{
+    display: none;
+}
+
+.buscar{
+    display: flex;
+    
+}
+
+.form{
+    display: flex;
+    padding-left: 400px;
+}
