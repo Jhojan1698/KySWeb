@@ -1,0 +1,1456 @@
+<html><head><title>build-impl.xml</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body>
+<h3>File: C:\Users\Segundo\Documents\NetBeansProjects\JSP - Proyecto de carrito de compras\Proyecto - JSP y Mysql - Tienda Online\WebApplication1\nbproject\build-impl.xml</h3>
+<SCRIPT>
+ defaultStatus = "File: C:\\Users\\Segundo\\Documents\\NetBeansProjects\\JSP - Proyecto de carrito de compras\\Proyecto - JSP y Mysql - Tienda Online\\WebApplication1\\nbproject\\build-impl.xml";
+top.document.title  = "build-impl.xml";
+</SCRIPT>
+<pre><a name="1"><font size=-1>1     </font></a><?xml version="1.0" encoding="UTF-8"?>
+<a name="2"><font size=-1>2     </font></a><!--
+<a name="3"><font size=-1>3     </font></a>        *** GENERATED FROM project.xml - DO NOT EDIT  ***
+<a name="4"><font size=-1>4     </font></a>        ***         EDIT ../build.xml INSTEAD         ***
+<a name="5"><font size=-1>5     </font></a>
+<a name="6"><font size=-1>6     </font></a>        For the purpose of easier reading the script
+<a name="7"><font size=-1>7     </font></a>        is divided into following sections:
+<a name="8"><font size=-1>8     </font></a>        - initialization
+<a name="9"><font size=-1>9     </font></a>        - compilation
+<a name="10"><font size=-1>10     </font></a>        - dist
+<a name="11"><font size=-1>11     </font></a>        - execution
+<a name="12"><font size=-1>12     </font></a>        - debugging
+<a name="13"><font size=-1>13     </font></a>        - javadoc
+<a name="14"><font size=-1>14     </font></a>        - test compilation
+<a name="15"><font size=-1>15     </font></a>        - test execution
+<a name="16"><font size=-1>16     </font></a>        - test debugging
+<a name="17"><font size=-1>17     </font></a>        - cleanup
+<a name="18"><font size=-1>18     </font></a>
+<a name="19"><font size=-1>19     </font></a>        -->
+<a name="20"><font size=-1>20     </font></a><project xmlns:webproject1="http://www.netbeans.org/ns/web-project/1" xmlns:webproject2="http://www.netbeans.org/ns/web-project/2" xmlns:webproject3="http://www.netbeans.org/ns/web-project/3" basedir=".." default="default" name="KySWeb-impl">
+<a name="21"><font size=-1>21     </font></a>    <import file="ant-deploy.xml"/>
+<a name="22"><font size=-1>22     </font></a>    <fail message="Please build using Ant 1.7.1 or higher.">
+<a name="23"><font size=-1>23     </font></a>        <condition>
+<a name="24"><font size=-1>24     </font></a>            <not>
+<a name="25"><font size=-1>25     </font></a>                <antversion atleast="1.7.1"/>
+<a name="26"><font size=-1>26     </font></a>            </not>
+<a name="27"><font size=-1>27     </font></a>        </condition>
+<a name="28"><font size=-1>28     </font></a>    </fail>
+<a name="29"><font size=-1>29     </font></a>    <target depends="dist,javadoc" description="Build whole project." name="default"/>
+<a name="30"><font size=-1>30     </font></a>    <!--
+<a name="31"><font size=-1>31     </font></a>                INITIALIZATION SECTION
+<a name="32"><font size=-1>32     </font></a>            -->
+<a name="33"><font size=-1>33     </font></a>    <target name="-pre-init">
+<a name="34"><font size=-1>34     </font></a>        <!-- Empty placeholder for easier customization. -->
+<a name="35"><font size=-1>35     </font></a>        <!-- You can override this target in the ../build.xml file. -->
+<a name="36"><font size=-1>36     </font></a>    </target>
+<a name="37"><font size=-1>37     </font></a>    <target depends="-pre-init" name="-init-private">
+<a name="38"><font size=-1>38     </font></a>        <property file="nbproject/private/private.properties"/>
+<a name="39"><font size=-1>39     </font></a>    </target>
+<a name="40"><font size=-1>40     </font></a>    <target depends="-pre-init,-init-private" name="-init-user">
+<a name="41"><font size=-1>41     </font></a>        <property file="${user.properties.file}"/>
+<a name="42"><font size=-1>42     </font></a>        <!-- The two properties below are usually overridden -->
+<a name="43"><font size=-1>43     </font></a>        <!-- by the active platform. Just a fallback. -->
+<a name="44"><font size=-1>44     </font></a>        <property name="default.javac.source" value="1.4"/>
+<a name="45"><font size=-1>45     </font></a>        <property name="default.javac.target" value="1.4"/>
+<a name="46"><font size=-1>46     </font></a>    </target>
+<a name="47"><font size=-1>47     </font></a>    <target depends="-pre-init,-init-private,-init-user" name="-init-project">
+<a name="48"><font size=-1>48     </font></a>        <property file="nbproject/project.properties"/>
+<a name="49"><font size=-1>49     </font></a>    </target>
+<a name="50"><font size=-1>50     </font></a>    <target depends="-pre-init,-init-private,-init-user,-init-project,-init-macrodef-property" if="dist.ear.dir" name="-do-ear-init"/>
+<a name="51"><font size=-1>51     </font></a>    <target depends="-pre-init,-init-private,-init-user,-init-project,-init-macrodef-property" name="-do-init">
+<a name="52"><font size=-1>52     </font></a>        <condition property="have.tests">
+<a name="53"><font size=-1>53     </font></a>            <or>
+<a name="54"><font size=-1>54     </font></a>                <available file="${test.src.dir}"/>
+<a name="55"><font size=-1>55     </font></a>            </or>
+<a name="56"><font size=-1>56     </font></a>        </condition>
+<a name="57"><font size=-1>57     </font></a>        <condition property="have.sources">
+<a name="58"><font size=-1>58     </font></a>            <or>
+<a name="59"><font size=-1>59     </font></a>                <available file="${src.dir}"/>
+<a name="60"><font size=-1>60     </font></a>            </or>
+<a name="61"><font size=-1>61     </font></a>        </condition>
+<a name="62"><font size=-1>62     </font></a>        <condition property="netbeans.home+have.tests">
+<a name="63"><font size=-1>63     </font></a>            <and>
+<a name="64"><font size=-1>64     </font></a>                <isset property="netbeans.home"/>
+<a name="65"><font size=-1>65     </font></a>                <isset property="have.tests"/>
+<a name="66"><font size=-1>66     </font></a>            </and>
+<a name="67"><font size=-1>67     </font></a>        </condition>
+<a name="68"><font size=-1>68     </font></a>        <condition property="no.javadoc.preview">
+<a name="69"><font size=-1>69     </font></a>            <isfalse value="${javadoc.preview}"/>
+<a name="70"><font size=-1>70     </font></a>        </condition>
+<a name="71"><font size=-1>71     </font></a>        <property name="javac.compilerargs" value=""/>
+<a name="72"><font size=-1>72     </font></a>        <condition property="no.deps">
+<a name="73"><font size=-1>73     </font></a>            <and>
+<a name="74"><font size=-1>74     </font></a>                <istrue value="${no.dependencies}"/>
+<a name="75"><font size=-1>75     </font></a>            </and>
+<a name="76"><font size=-1>76     </font></a>        </condition>
+<a name="77"><font size=-1>77     </font></a>        <condition property="no.dist.ear.dir">
+<a name="78"><font size=-1>78     </font></a>            <not>
+<a name="79"><font size=-1>79     </font></a>                <isset property="dist.ear.dir"/>
+<a name="80"><font size=-1>80     </font></a>            </not>
+<a name="81"><font size=-1>81     </font></a>        </condition>
+<a name="82"><font size=-1>82     </font></a>        <property name="build.web.excludes" value="${build.classes.excludes}"/>
+<a name="83"><font size=-1>83     </font></a>        <condition property="do.compile.jsps">
+<a name="84"><font size=-1>84     </font></a>            <istrue value="${compile.jsps}"/>
+<a name="85"><font size=-1>85     </font></a>        </condition>
+<a name="86"><font size=-1>86     </font></a>        <condition property="do.debug.server">
+<a name="87"><font size=-1>87     </font></a>            <or>
+<a name="88"><font size=-1>88     </font></a>                <not>
+<a name="89"><font size=-1>89     </font></a>                    <isset property="debug.server"/>
+<a name="90"><font size=-1>90     </font></a>                </not>
+<a name="91"><font size=-1>91     </font></a>                <istrue value="${debug.server}"/>
+<a name="92"><font size=-1>92     </font></a>                <and>
+<a name="93"><font size=-1>93     </font></a>                    <not>
+<a name="94"><font size=-1>94     </font></a>                        <istrue value="${debug.server}"/>
+<a name="95"><font size=-1>95     </font></a>                    </not>
+<a name="96"><font size=-1>96     </font></a>                    <not>
+<a name="97"><font size=-1>97     </font></a>                        <istrue value="${debug.client}"/>
+<a name="98"><font size=-1>98     </font></a>                    </not>
+<a name="99"><font size=-1>99     </font></a>                </and>
+<a name="100"><font size=-1>100     </font></a>            </or>
+<a name="101"><font size=-1>101     </font></a>        </condition>
+<a name="102"><font size=-1>102     </font></a>        <condition property="do.debug.client">
+<a name="103"><font size=-1>103     </font></a>            <istrue value="${debug.client}"/>
+<a name="104"><font size=-1>104     </font></a>        </condition>
+<a name="105"><font size=-1>105     </font></a>        <condition property="do.display.browser">
+<a name="106"><font size=-1>106     </font></a>            <istrue value="${display.browser}"/>
+<a name="107"><font size=-1>107     </font></a>        </condition>
+<a name="108"><font size=-1>108     </font></a>        <condition property="do.display.browser.debug.old">
+<a name="109"><font size=-1>109     </font></a>            <and>
+<a name="110"><font size=-1>110     </font></a>                <isset property="do.display.browser"/>
+<a name="111"><font size=-1>111     </font></a>                <not>
+<a name="112"><font size=-1>112     </font></a>                    <isset property="do.debug.client"/>
+<a name="113"><font size=-1>113     </font></a>                </not>
+<a name="114"><font size=-1>114     </font></a>                <not>
+<a name="115"><font size=-1>115     </font></a>                    <isset property="browser.context"/>
+<a name="116"><font size=-1>116     </font></a>                </not>
+<a name="117"><font size=-1>117     </font></a>            </and>
+<a name="118"><font size=-1>118     </font></a>        </condition>
+<a name="119"><font size=-1>119     </font></a>        <condition property="do.display.browser.debug">
+<a name="120"><font size=-1>120     </font></a>            <and>
+<a name="121"><font size=-1>121     </font></a>                <isset property="do.display.browser"/>
+<a name="122"><font size=-1>122     </font></a>                <not>
+<a name="123"><font size=-1>123     </font></a>                    <isset property="do.debug.client"/>
+<a name="124"><font size=-1>124     </font></a>                </not>
+<a name="125"><font size=-1>125     </font></a>                <isset property="browser.context"/>
+<a name="126"><font size=-1>126     </font></a>            </and>
+<a name="127"><font size=-1>127     </font></a>        </condition>
+<a name="128"><font size=-1>128     </font></a>        <available file="${conf.dir}/MANIFEST.MF" property="has.custom.manifest"/>
+<a name="129"><font size=-1>129     </font></a>        <available file="${persistence.xml.dir}/persistence.xml" property="has.persistence.xml"/>
+<a name="130"><font size=-1>130     </font></a>        <condition property="do.war.package.with.custom.manifest">
+<a name="131"><font size=-1>131     </font></a>            <isset property="has.custom.manifest"/>
+<a name="132"><font size=-1>132     </font></a>        </condition>
+<a name="133"><font size=-1>133     </font></a>        <condition property="do.war.package.without.custom.manifest">
+<a name="134"><font size=-1>134     </font></a>            <not>
+<a name="135"><font size=-1>135     </font></a>                <isset property="has.custom.manifest"/>
+<a name="136"><font size=-1>136     </font></a>            </not>
+<a name="137"><font size=-1>137     </font></a>        </condition>
+<a name="138"><font size=-1>138     </font></a>        <condition property="do.tmp.war.package.with.custom.manifest">
+<a name="139"><font size=-1>139     </font></a>            <and>
+<a name="140"><font size=-1>140     </font></a>                <isset property="has.custom.manifest"/>
+<a name="141"><font size=-1>141     </font></a>                <or>
+<a name="142"><font size=-1>142     </font></a>                    <isfalse value="${directory.deployment.supported}"/>
+<a name="143"><font size=-1>143     </font></a>                    <isset property="dist.ear.dir"/>
+<a name="144"><font size=-1>144     </font></a>                </or>
+<a name="145"><font size=-1>145     </font></a>            </and>
+<a name="146"><font size=-1>146     </font></a>        </condition>
+<a name="147"><font size=-1>147     </font></a>        <condition property="do.tmp.war.package.without.custom.manifest">
+<a name="148"><font size=-1>148     </font></a>            <and>
+<a name="149"><font size=-1>149     </font></a>                <not>
+<a name="150"><font size=-1>150     </font></a>                    <isset property="has.custom.manifest"/>
+<a name="151"><font size=-1>151     </font></a>                </not>
+<a name="152"><font size=-1>152     </font></a>                <or>
+<a name="153"><font size=-1>153     </font></a>                    <isfalse value="${directory.deployment.supported}"/>
+<a name="154"><font size=-1>154     </font></a>                    <isset property="dist.ear.dir"/>
+<a name="155"><font size=-1>155     </font></a>                </or>
+<a name="156"><font size=-1>156     </font></a>            </and>
+<a name="157"><font size=-1>157     </font></a>        </condition>
+<a name="158"><font size=-1>158     </font></a>        <condition property="do.tmp.war.package">
+<a name="159"><font size=-1>159     </font></a>            <or>
+<a name="160"><font size=-1>160     </font></a>                <isfalse value="${directory.deployment.supported}"/>
+<a name="161"><font size=-1>161     </font></a>                <isset property="dist.ear.dir"/>
+<a name="162"><font size=-1>162     </font></a>            </or>
+<a name="163"><font size=-1>163     </font></a>        </condition>
+<a name="164"><font size=-1>164     </font></a>        <property name="build.meta.inf.dir" value="${build.web.dir}/META-INF"/>
+<a name="165"><font size=-1>165     </font></a>        <condition else="" property="application.args.param" value="${application.args}">
+<a name="166"><font size=-1>166     </font></a>            <and>
+<a name="167"><font size=-1>167     </font></a>                <isset property="application.args"/>
+<a name="168"><font size=-1>168     </font></a>                <not>
+<a name="169"><font size=-1>169     </font></a>                    <equals arg1="${application.args}" arg2="" trim="true"/>
+<a name="170"><font size=-1>170     </font></a>                </not>
+<a name="171"><font size=-1>171     </font></a>            </and>
+<a name="172"><font size=-1>172     </font></a>        </condition>
+<a name="173"><font size=-1>173     </font></a>        <property name="source.encoding" value="${file.encoding}"/>
+<a name="174"><font size=-1>174     </font></a>        <condition property="javadoc.encoding.used" value="${javadoc.encoding}">
+<a name="175"><font size=-1>175     </font></a>            <and>
+<a name="176"><font size=-1>176     </font></a>                <isset property="javadoc.encoding"/>
+<a name="177"><font size=-1>177     </font></a>                <not>
+<a name="178"><font size=-1>178     </font></a>                    <equals arg1="${javadoc.encoding}" arg2=""/>
+<a name="179"><font size=-1>179     </font></a>                </not>
+<a name="180"><font size=-1>180     </font></a>            </and>
+<a name="181"><font size=-1>181     </font></a>        </condition>
+<a name="182"><font size=-1>182     </font></a>        <property name="javadoc.encoding.used" value="${source.encoding}"/>
+<a name="183"><font size=-1>183     </font></a>        <property name="includes" value="**"/>
+<a name="184"><font size=-1>184     </font></a>        <property name="excludes" value=""/>
+<a name="185"><font size=-1>185     </font></a>        <property name="runmain.jvmargs" value=""/>
+<a name="186"><font size=-1>186     </font></a>        <path id="endorsed.classpath.path" path="${endorsed.classpath}"/>
+<a name="187"><font size=-1>187     </font></a>        <condition else="" property="endorsed.classpath.cmd.line.arg" value="-Xbootclasspath/p:'${toString:endorsed.classpath.path}'">
+<a name="188"><font size=-1>188     </font></a>            <and>
+<a name="189"><font size=-1>189     </font></a>                <isset property="endorsed.classpath"/>
+<a name="190"><font size=-1>190     </font></a>                <length length="0" string="${endorsed.classpath}" when="greater"/>
+<a name="191"><font size=-1>191     </font></a>            </and>
+<a name="192"><font size=-1>192     </font></a>        </condition>
+<a name="193"><font size=-1>193     </font></a>        <condition else="false" property="jdkBug6558476">
+<a name="194"><font size=-1>194     </font></a>            <and>
+<a name="195"><font size=-1>195     </font></a>                <matches pattern="1\.[56]" string="${java.specification.version}"/>
+<a name="196"><font size=-1>196     </font></a>                <not>
+<a name="197"><font size=-1>197     </font></a>                    <os family="unix"/>
+<a name="198"><font size=-1>198     </font></a>                </not>
+<a name="199"><font size=-1>199     </font></a>            </and>
+<a name="200"><font size=-1>200     </font></a>        </condition>
+<a name="201"><font size=-1>201     </font></a>        <property name="javac.fork" value="${jdkBug6558476}"/>
+<a name="202"><font size=-1>202     </font></a>        <condition property="junit.available">
+<a name="203"><font size=-1>203     </font></a>            <or>
+<a name="204"><font size=-1>204     </font></a>                <available classname="org.junit.Test" classpath="${run.test.classpath}"/>
+<a name="205"><font size=-1>205     </font></a>                <available classname="junit.framework.Test" classpath="${run.test.classpath}"/>
+<a name="206"><font size=-1>206     </font></a>            </or>
+<a name="207"><font size=-1>207     </font></a>        </condition>
+<a name="208"><font size=-1>208     </font></a>        <condition property="testng.available">
+<a name="209"><font size=-1>209     </font></a>            <available classname="org.testng.annotations.Test" classpath="${run.test.classpath}"/>
+<a name="210"><font size=-1>210     </font></a>        </condition>
+<a name="211"><font size=-1>211     </font></a>        <condition property="junit+testng.available">
+<a name="212"><font size=-1>212     </font></a>            <and>
+<a name="213"><font size=-1>213     </font></a>                <istrue value="${junit.available}"/>
+<a name="214"><font size=-1>214     </font></a>                <istrue value="${testng.available}"/>
+<a name="215"><font size=-1>215     </font></a>            </and>
+<a name="216"><font size=-1>216     </font></a>        </condition>
+<a name="217"><font size=-1>217     </font></a>        <condition else="testng" property="testng.mode" value="mixed">
+<a name="218"><font size=-1>218     </font></a>            <istrue value="${junit+testng.available}"/>
+<a name="219"><font size=-1>219     </font></a>        </condition>
+<a name="220"><font size=-1>220     </font></a>        <condition else="" property="testng.debug.mode" value="-mixed">
+<a name="221"><font size=-1>221     </font></a>            <istrue value="${junit+testng.available}"/>
+<a name="222"><font size=-1>222     </font></a>        </condition>
+<a name="223"><font size=-1>223     </font></a>    </target>
+<a name="224"><font size=-1>224     </font></a>    <target depends="init" name="-init-cos" unless="deploy.on.save">
+<a name="225"><font size=-1>225     </font></a>        <condition property="deploy.on.save" value="true">
+<a name="226"><font size=-1>226     </font></a>            <or>
+<a name="227"><font size=-1>227     </font></a>                <istrue value="${j2ee.deploy.on.save}"/>
+<a name="228"><font size=-1>228     </font></a>                <istrue value="${j2ee.compile.on.save}"/>
+<a name="229"><font size=-1>229     </font></a>            </or>
+<a name="230"><font size=-1>230     </font></a>        </condition>
+<a name="231"><font size=-1>231     </font></a>    </target>
+<a name="232"><font size=-1>232     </font></a>    <target name="-post-init">
+<a name="233"><font size=-1>233     </font></a>        <!-- Empty placeholder for easier customization. -->
+<a name="234"><font size=-1>234     </font></a>        <!-- You can override this target in the ../build.xml file. -->
+<a name="235"><font size=-1>235     </font></a>    </target>
+<a name="236"><font size=-1>236     </font></a>    <target depends="-pre-init,-init-private,-init-user,-init-project,-do-init" name="-init-check">
+<a name="237"><font size=-1>237     </font></a>        <fail unless="src.dir">Must set src.dir</fail>
+<a name="238"><font size=-1>238     </font></a>        <fail unless="test.src.dir">Must set test.src.dir</fail>
+<a name="239"><font size=-1>239     </font></a>        <fail unless="build.dir">Must set build.dir</fail>
+<a name="240"><font size=-1>240     </font></a>        <fail unless="build.web.dir">Must set build.web.dir</fail>
+<a name="241"><font size=-1>241     </font></a>        <fail unless="build.generated.dir">Must set build.generated.dir</fail>
+<a name="242"><font size=-1>242     </font></a>        <fail unless="dist.dir">Must set dist.dir</fail>
+<a name="243"><font size=-1>243     </font></a>        <fail unless="build.classes.dir">Must set build.classes.dir</fail>
+<a name="244"><font size=-1>244     </font></a>        <fail unless="dist.javadoc.dir">Must set dist.javadoc.dir</fail>
+<a name="245"><font size=-1>245     </font></a>        <fail unless="build.test.classes.dir">Must set build.test.classes.dir</fail>
+<a name="246"><font size=-1>246     </font></a>        <fail unless="build.test.results.dir">Must set build.test.results.dir</fail>
+<a name="247"><font size=-1>247     </font></a>        <fail unless="build.classes.excludes">Must set build.classes.excludes</fail>
+<a name="248"><font size=-1>248     </font></a>        <fail unless="dist.war">Must set dist.war</fail>
+<a name="249"><font size=-1>249     </font></a>        <condition property="missing.j2ee.server.home">
+<a name="250"><font size=-1>250     </font></a>            <and>
+<a name="251"><font size=-1>251     </font></a>                <matches pattern="j2ee.server.home" string="${j2ee.platform.classpath}"/>
+<a name="252"><font size=-1>252     </font></a>                <not>
+<a name="253"><font size=-1>253     </font></a>                    <isset property="j2ee.server.home"/>
+<a name="254"><font size=-1>254     </font></a>                </not>
+<a name="255"><font size=-1>255     </font></a>            </and>
+<a name="256"><font size=-1>256     </font></a>        </condition>
+<a name="257"><font size=-1>257     </font></a>        <fail if="missing.j2ee.server.home">
+<a name="258"><font size=-1>258     </font></a>The Java EE server classpath is not correctly set up - server home directory is missing.
+<a name="259"><font size=-1>259     </font></a>Either open the project in the IDE and assign the server or setup the server classpath manually.
+<a name="260"><font size=-1>260     </font></a>For example like this:
+<a name="261"><font size=-1>261     </font></a>   ant -Dj2ee.server.home=&lt;app_server_installation_directory&gt;
+<a name="262"><font size=-1>262     </font></a>                </fail>
+<a name="263"><font size=-1>263     </font></a>        <fail unless="j2ee.platform.classpath">
+<a name="264"><font size=-1>264     </font></a>The Java EE server classpath is not correctly set up. Your active server type is ${j2ee.server.type}.
+<a name="265"><font size=-1>265     </font></a>Either open the project in the IDE and assign the server or setup the server classpath manually.
+<a name="266"><font size=-1>266     </font></a>For example like this:
+<a name="267"><font size=-1>267     </font></a>   ant -Duser.properties.file=&lt;path_to_property_file&gt; (where you put the property "j2ee.platform.classpath" in a .properties file)
+<a name="268"><font size=-1>268     </font></a>or ant -Dj2ee.platform.classpath=&lt;server_classpath&gt; (where no properties file is used)
+<a name="269"><font size=-1>269     </font></a>                </fail>
+<a name="270"><font size=-1>270     </font></a>    </target>
+<a name="271"><font size=-1>271     </font></a>    <target name="-init-macrodef-property">
+<a name="272"><font size=-1>272     </font></a>        <macrodef name="property" uri="http://www.netbeans.org/ns/web-project/1">
+<a name="273"><font size=-1>273     </font></a>            <attribute name="name"/>
+<a name="274"><font size=-1>274     </font></a>            <attribute name="value"/>
+<a name="275"><font size=-1>275     </font></a>            <sequential>
+<a name="276"><font size=-1>276     </font></a>                <property name="@{name}" value="${@{value}}"/>
+<a name="277"><font size=-1>277     </font></a>            </sequential>
+<a name="278"><font size=-1>278     </font></a>        </macrodef>
+<a name="279"><font size=-1>279     </font></a>    </target>
+<a name="280"><font size=-1>280     </font></a>    <target depends="-init-ap-cmdline-properties" if="ap.supported.internal" name="-init-macrodef-javac-with-processors">
+<a name="281"><font size=-1>281     </font></a>        <macrodef name="javac" uri="http://www.netbeans.org/ns/web-project/2">
+<a name="282"><font size=-1>282     </font></a>            <attribute default="${src.dir}" name="srcdir"/>
+<a name="283"><font size=-1>283     </font></a>            <attribute default="${build.classes.dir}" name="destdir"/>
+<a name="284"><font size=-1>284     </font></a>            <attribute default="${javac.classpath}:${j2ee.platform.classpath}" name="classpath"/>
+<a name="285"><font size=-1>285     </font></a>            <attribute default="${javac.processorpath}" name="processorpath"/>
+<a name="286"><font size=-1>286     </font></a>            <attribute default="${build.generated.sources.dir}/ap-source-output" name="apgeneratedsrcdir"/>
+<a name="287"><font size=-1>287     </font></a>            <attribute default="${includes}" name="includes"/>
+<a name="288"><font size=-1>288     </font></a>            <attribute default="${excludes}" name="excludes"/>
+<a name="289"><font size=-1>289     </font></a>            <attribute default="${javac.debug}" name="debug"/>
+<a name="290"><font size=-1>290     </font></a>            <attribute default="${empty.dir}" name="gensrcdir"/>
+<a name="291"><font size=-1>291     </font></a>            <element name="customize" optional="true"/>
+<a name="292"><font size=-1>292     </font></a>            <sequential>
+<a name="293"><font size=-1>293     </font></a>                <property location="${build.dir}/empty" name="empty.dir"/>
+<a name="294"><font size=-1>294     </font></a>                <mkdir dir="${empty.dir}"/>
+<a name="295"><font size=-1>295     </font></a>                <mkdir dir="@{apgeneratedsrcdir}"/>
+<a name="296"><font size=-1>296     </font></a>                <javac debug="@{debug}" deprecation="${javac.deprecation}" destdir="@{destdir}" encoding="${source.encoding}" excludes="@{excludes}" fork="${javac.fork}" includeantruntime="false" includes="@{includes}" source="${javac.source}" srcdir="@{srcdir}" target="${javac.target}">
+<a name="297"><font size=-1>297     </font></a>                    <src>
+<a name="298"><font size=-1>298     </font></a>                        <dirset dir="@{gensrcdir}" erroronmissingdir="false">
+<a name="299"><font size=-1>299     </font></a>                            <include name="*"/>
+<a name="300"><font size=-1>300     </font></a>                        </dirset>
+<a name="301"><font size=-1>301     </font></a>                    </src>
+<a name="302"><font size=-1>302     </font></a>                    <classpath>
+<a name="303"><font size=-1>303     </font></a>                        <path path="@{classpath}"/>
+<a name="304"><font size=-1>304     </font></a>                    </classpath>
+<a name="305"><font size=-1>305     </font></a>                    <compilerarg line="${endorsed.classpath.cmd.line.arg}"/>
+<a name="306"><font size=-1>306     </font></a>                    <compilerarg line="${javac.compilerargs}"/>
+<a name="307"><font size=-1>307     </font></a>                    <compilerarg value="-processorpath"/>
+<a name="308"><font size=-1>308     </font></a>                    <compilerarg path="@{processorpath}:${empty.dir}"/>
+<a name="309"><font size=-1>309     </font></a>                    <compilerarg line="${ap.processors.internal}"/>
+<a name="310"><font size=-1>310     </font></a>                    <compilerarg value="-s"/>
+<a name="311"><font size=-1>311     </font></a>                    <compilerarg path="@{apgeneratedsrcdir}"/>
+<a name="312"><font size=-1>312     </font></a>                    <compilerarg line="${ap.proc.none.internal}"/>
+<a name="313"><font size=-1>313     </font></a>                    <customize/>
+<a name="314"><font size=-1>314     </font></a>                </javac>
+<a name="315"><font size=-1>315     </font></a>            </sequential>
+<a name="316"><font size=-1>316     </font></a>        </macrodef>
+<a name="317"><font size=-1>317     </font></a>    </target>
+<a name="318"><font size=-1>318     </font></a>    <target depends="-init-ap-cmdline-properties" name="-init-macrodef-javac-without-processors" unless="ap.supported.internal">
+<a name="319"><font size=-1>319     </font></a>        <macrodef name="javac" uri="http://www.netbeans.org/ns/web-project/2">
+<a name="320"><font size=-1>320     </font></a>            <attribute default="${src.dir}" name="srcdir"/>
+<a name="321"><font size=-1>321     </font></a>            <attribute default="${build.classes.dir}" name="destdir"/>
+<a name="322"><font size=-1>322     </font></a>            <attribute default="${javac.classpath}:${j2ee.platform.classpath}" name="classpath"/>
+<a name="323"><font size=-1>323     </font></a>            <attribute default="${javac.processorpath}" name="processorpath"/>
+<a name="324"><font size=-1>324     </font></a>            <attribute default="${build.generated.sources.dir}/ap-source-output" name="apgeneratedsrcdir"/>
+<a name="325"><font size=-1>325     </font></a>            <attribute default="${includes}" name="includes"/>
+<a name="326"><font size=-1>326     </font></a>            <attribute default="${excludes}" name="excludes"/>
+<a name="327"><font size=-1>327     </font></a>            <attribute default="${javac.debug}" name="debug"/>
+<a name="328"><font size=-1>328     </font></a>            <attribute default="${empty.dir}" name="gensrcdir"/>
+<a name="329"><font size=-1>329     </font></a>            <element name="customize" optional="true"/>
+<a name="330"><font size=-1>330     </font></a>            <sequential>
+<a name="331"><font size=-1>331     </font></a>                <property location="${build.dir}/empty" name="empty.dir"/>
+<a name="332"><font size=-1>332     </font></a>                <mkdir dir="${empty.dir}"/>
+<a name="333"><font size=-1>333     </font></a>                <javac debug="@{debug}" deprecation="${javac.deprecation}" destdir="@{destdir}" encoding="${source.encoding}" excludes="@{excludes}" includeantruntime="false" includes="@{includes}" source="${javac.source}" srcdir="@{srcdir}" target="${javac.target}">
+<a name="334"><font size=-1>334     </font></a>                    <src>
+<a name="335"><font size=-1>335     </font></a>                        <dirset dir="@{gensrcdir}" erroronmissingdir="false">
+<a name="336"><font size=-1>336     </font></a>                            <include name="*"/>
+<a name="337"><font size=-1>337     </font></a>                        </dirset>
+<a name="338"><font size=-1>338     </font></a>                    </src>
+<a name="339"><font size=-1>339     </font></a>                    <classpath>
+<a name="340"><font size=-1>340     </font></a>                        <path path="@{classpath}"/>
+<a name="341"><font size=-1>341     </font></a>                    </classpath>
+<a name="342"><font size=-1>342     </font></a>                    <compilerarg line="${endorsed.classpath.cmd.line.arg}"/>
+<a name="343"><font size=-1>343     </font></a>                    <compilerarg line="${javac.compilerargs}"/>
+<a name="344"><font size=-1>344     </font></a>                    <customize/>
+<a name="345"><font size=-1>345     </font></a>                </javac>
+<a name="346"><font size=-1>346     </font></a>            </sequential>
+<a name="347"><font size=-1>347     </font></a>        </macrodef>
+<a name="348"><font size=-1>348     </font></a>    </target>
+<a name="349"><font size=-1>349     </font></a>    <target depends="-init-macrodef-javac-with-processors,-init-macrodef-javac-without-processors" name="-init-macrodef-javac">
+<a name="350"><font size=-1>350     </font></a>        <macrodef name="depend" uri="http://www.netbeans.org/ns/web-project/2">
+<a name="351"><font size=-1>351     </font></a>            <attribute default="${src.dir}" name="srcdir"/>
+<a name="352"><font size=-1>352     </font></a>            <attribute default="${build.classes.dir}" name="destdir"/>
+<a name="353"><font size=-1>353     </font></a>            <attribute default="${javac.classpath}:${j2ee.platform.classpath}" name="classpath"/>
+<a name="354"><font size=-1>354     </font></a>            <sequential>
+<a name="355"><font size=-1>355     </font></a>                <depend cache="${build.dir}/depcache" destdir="@{destdir}" excludes="${excludes}" includes="${includes}" srcdir="@{srcdir}">
+<a name="356"><font size=-1>356     </font></a>                    <classpath>
+<a name="357"><font size=-1>357     </font></a>                        <path path="@{classpath}"/>
+<a name="358"><font size=-1>358     </font></a>                    </classpath>
+<a name="359"><font size=-1>359     </font></a>                </depend>
+<a name="360"><font size=-1>360     </font></a>            </sequential>
+<a name="361"><font size=-1>361     </font></a>        </macrodef>
+<a name="362"><font size=-1>362     </font></a>        <macrodef name="force-recompile" uri="http://www.netbeans.org/ns/web-project/2">
+<a name="363"><font size=-1>363     </font></a>            <attribute default="${build.classes.dir}" name="destdir"/>
+<a name="364"><font size=-1>364     </font></a>            <sequential>
+<a name="365"><font size=-1>365     </font></a>                <fail unless="javac.includes">Must set javac.includes</fail>
+<a name="366"><font size=-1>366     </font></a>                <pathconvert pathsep="${line.separator}" property="javac.includes.binary">
+<a name="367"><font size=-1>367     </font></a>                    <path>
+<a name="368"><font size=-1>368     </font></a>                        <filelist dir="@{destdir}" files="${javac.includes}"/>
+<a name="369"><font size=-1>369     </font></a>                    </path>
+<a name="370"><font size=-1>370     </font></a>                    <globmapper from="*.java" to="*.class"/>
+<a name="371"><font size=-1>371     </font></a>                </pathconvert>
+<a name="372"><font size=-1>372     </font></a>                <tempfile deleteonexit="true" property="javac.includesfile.binary"/>
+<a name="373"><font size=-1>373     </font></a>                <echo file="${javac.includesfile.binary}" message="${javac.includes.binary}"/>
+<a name="374"><font size=-1>374     </font></a>                <delete>
+<a name="375"><font size=-1>375     </font></a>                    <files includesfile="${javac.includesfile.binary}"/>
+<a name="376"><font size=-1>376     </font></a>                </delete>
+<a name="377"><font size=-1>377     </font></a>                <delete file="${javac.includesfile.binary}"/>
+<a name="378"><font size=-1>378     </font></a>            </sequential>
+<a name="379"><font size=-1>379     </font></a>        </macrodef>
+<a name="380"><font size=-1>380     </font></a>    </target>
+<a name="381"><font size=-1>381     </font></a>    <target if="${junit.available}" name="-init-macrodef-junit-init">
+<a name="382"><font size=-1>382     </font></a>        <condition else="false" property="nb.junit.batch" value="true">
+<a name="383"><font size=-1>383     </font></a>            <and>
+<a name="384"><font size=-1>384     </font></a>                <istrue value="${junit.available}"/>
+<a name="385"><font size=-1>385     </font></a>                <not>
+<a name="386"><font size=-1>386     </font></a>                    <isset property="test.method"/>
+<a name="387"><font size=-1>387     </font></a>                </not>
+<a name="388"><font size=-1>388     </font></a>            </and>
+<a name="389"><font size=-1>389     </font></a>        </condition>
+<a name="390"><font size=-1>390     </font></a>        <condition else="false" property="nb.junit.single" value="true">
+<a name="391"><font size=-1>391     </font></a>            <and>
+<a name="392"><font size=-1>392     </font></a>                <istrue value="${junit.available}"/>
+<a name="393"><font size=-1>393     </font></a>                <isset property="test.method"/>
+<a name="394"><font size=-1>394     </font></a>            </and>
+<a name="395"><font size=-1>395     </font></a>        </condition>
+<a name="396"><font size=-1>396     </font></a>    </target>
+<a name="397"><font size=-1>397     </font></a>    <target name="-init-test-properties">
+<a name="398"><font size=-1>398     </font></a>        <property name="test.binaryincludes" value="&lt;nothing&gt;"/>
+<a name="399"><font size=-1>399     </font></a>        <property name="test.binarytestincludes" value=""/>
+<a name="400"><font size=-1>400     </font></a>        <property name="test.binaryexcludes" value=""/>
+<a name="401"><font size=-1>401     </font></a>    </target>
+<a name="402"><font size=-1>402     </font></a>    <target if="${nb.junit.single}" name="-init-macrodef-junit-single" unless="${nb.junit.batch}">
+<a name="403"><font size=-1>403     </font></a>        <macrodef name="junit" uri="http://www.netbeans.org/ns/web-project/2">
+<a name="404"><font size=-1>404     </font></a>            <attribute default="${includes}" name="includes"/>
+<a name="405"><font size=-1>405     </font></a>            <attribute default="${excludes}" name="excludes"/>
+<a name="406"><font size=-1>406     </font></a>            <attribute default="**" name="testincludes"/>
+<a name="407"><font size=-1>407     </font></a>            <attribute default="" name="testmethods"/>
+<a name="408"><font size=-1>408     </font></a>            <element name="customize" optional="true"/>
+<a name="409"><font size=-1>409     </font></a>            <sequential>
+<a name="410"><font size=-1>410     </font></a>                <junit dir="${basedir}" errorproperty="tests.failed" failureproperty="tests.failed" fork="true" showoutput="true" tempdir="${java.io.tmpdir}">
+<a name="411"><font size=-1>411     </font></a>                    <test methods="@{testmethods}" name="@{testincludes}" todir="${build.test.results.dir}"/>
+<a name="412"><font size=-1>412     </font></a>                    <syspropertyset>
+<a name="413"><font size=-1>413     </font></a>                        <propertyref prefix="test-sys-prop."/>
+<a name="414"><font size=-1>414     </font></a>                        <mapper from="test-sys-prop.*" to="*" type="glob"/>
+<a name="415"><font size=-1>415     </font></a>                    </syspropertyset>
+<a name="416"><font size=-1>416     </font></a>                    <formatter type="brief" usefile="false"/>
+<a name="417"><font size=-1>417     </font></a>                    <formatter type="xml"/>
+<a name="418"><font size=-1>418     </font></a>                    <jvmarg value="-ea"/>
+<a name="419"><font size=-1>419     </font></a>                    <customize/>
+<a name="420"><font size=-1>420     </font></a>                </junit>
+<a name="421"><font size=-1>421     </font></a>            </sequential>
+<a name="422"><font size=-1>422     </font></a>        </macrodef>
+<a name="423"><font size=-1>423     </font></a>    </target>
+<a name="424"><font size=-1>424     </font></a>    <target depends="-init-test-properties" if="${nb.junit.batch}" name="-init-macrodef-junit-batch" unless="${nb.junit.single}">
+<a name="425"><font size=-1>425     </font></a>        <macrodef name="junit" uri="http://www.netbeans.org/ns/web-project/2">
+<a name="426"><font size=-1>426     </font></a>            <attribute default="${includes}" name="includes"/>
+<a name="427"><font size=-1>427     </font></a>            <attribute default="${excludes}" name="excludes"/>
+<a name="428"><font size=-1>428     </font></a>            <attribute default="**" name="testincludes"/>
+<a name="429"><font size=-1>429     </font></a>            <attribute default="" name="testmethods"/>
+<a name="430"><font size=-1>430     </font></a>            <element name="customize" optional="true"/>
+<a name="431"><font size=-1>431     </font></a>            <sequential>
+<a name="432"><font size=-1>432     </font></a>                <property name="run.jvmargs.ide" value=""/>
+<a name="433"><font size=-1>433     </font></a>                <junit dir="${basedir}" errorproperty="tests.failed" failureproperty="tests.failed" fork="true" showoutput="true" tempdir="${build.dir}">
+<a name="434"><font size=-1>434     </font></a>                    <batchtest todir="${build.test.results.dir}">
+<a name="435"><font size=-1>435     </font></a>                        <fileset dir="${test.src.dir}" excludes="@{excludes},${excludes}" includes="@{includes}">
+<a name="436"><font size=-1>436     </font></a>                            <filename name="@{testincludes}"/>
+<a name="437"><font size=-1>437     </font></a>                        </fileset>
+<a name="438"><font size=-1>438     </font></a>                        <fileset dir="${build.test.classes.dir}" excludes="@{excludes},${excludes},${test.binaryexcludes}" includes="${test.binaryincludes}">
+<a name="439"><font size=-1>439     </font></a>                            <filename name="${test.binarytestincludes}"/>
+<a name="440"><font size=-1>440     </font></a>                        </fileset>
+<a name="441"><font size=-1>441     </font></a>                    </batchtest>
+<a name="442"><font size=-1>442     </font></a>                    <syspropertyset>
+<a name="443"><font size=-1>443     </font></a>                        <propertyref prefix="test-sys-prop."/>
+<a name="444"><font size=-1>444     </font></a>                        <mapper from="test-sys-prop.*" to="*" type="glob"/>
+<a name="445"><font size=-1>445     </font></a>                    </syspropertyset>
+<a name="446"><font size=-1>446     </font></a>                    <formatter type="brief" usefile="false"/>
+<a name="447"><font size=-1>447     </font></a>                    <formatter type="xml"/>
+<a name="448"><font size=-1>448     </font></a>                    <jvmarg value="-ea"/>
+<a name="449"><font size=-1>449     </font></a>                    <jvmarg line="${run.jvmargs.ide}"/>
+<a name="450"><font size=-1>450     </font></a>                    <customize/>
+<a name="451"><font size=-1>451     </font></a>                </junit>
+<a name="452"><font size=-1>452     </font></a>            </sequential>
+<a name="453"><font size=-1>453     </font></a>        </macrodef>
+<a name="454"><font size=-1>454     </font></a>    </target>
+<a name="455"><font size=-1>455     </font></a>    <target depends="-init-macrodef-junit-init,-init-macrodef-junit-single, -init-macrodef-junit-batch" if="${junit.available}" name="-init-macrodef-junit"/>
+<a name="456"><font size=-1>456     </font></a>    <target if="${testng.available}" name="-init-macrodef-testng">
+<a name="457"><font size=-1>457     </font></a>        <macrodef name="testng" uri="http://www.netbeans.org/ns/web-project/2">
+<a name="458"><font size=-1>458     </font></a>            <attribute default="${includes}" name="includes"/>
+<a name="459"><font size=-1>459     </font></a>            <attribute default="${excludes}" name="excludes"/>
+<a name="460"><font size=-1>460     </font></a>            <attribute default="**" name="testincludes"/>
+<a name="461"><font size=-1>461     </font></a>            <attribute default="" name="testmethods"/>
+<a name="462"><font size=-1>462     </font></a>            <element name="customize" optional="true"/>
+<a name="463"><font size=-1>463     </font></a>            <sequential>
+<a name="464"><font size=-1>464     </font></a>                <condition else="" property="testng.methods.arg" value="@{testincludes}.@{testmethods}">
+<a name="465"><font size=-1>465     </font></a>                    <isset property="test.method"/>
+<a name="466"><font size=-1>466     </font></a>                </condition>
+<a name="467"><font size=-1>467     </font></a>                <union id="test.set">
+<a name="468"><font size=-1>468     </font></a>                    <fileset dir="${test.src.dir}" excludes="@{excludes},**/*.xml,${excludes}" includes="@{includes}">
+<a name="469"><font size=-1>469     </font></a>                        <filename name="@{testincludes}"/>
+<a name="470"><font size=-1>470     </font></a>                    </fileset>
+<a name="471"><font size=-1>471     </font></a>                </union>
+<a name="472"><font size=-1>472     </font></a>                <taskdef classname="org.testng.TestNGAntTask" classpath="${run.test.classpath}" name="testng"/>
+<a name="473"><font size=-1>473     </font></a>                <testng classfilesetref="test.set" failureProperty="tests.failed" listeners="org.testng.reporters.VerboseReporter" methods="${testng.methods.arg}" mode="${testng.mode}" outputdir="${build.test.results.dir}" suitename="KySWeb" testname="TestNG tests" workingDir="${basedir}">
+<a name="474"><font size=-1>474     </font></a>                    <xmlfileset dir="${build.test.classes.dir}" includes="@{testincludes}"/>
+<a name="475"><font size=-1>475     </font></a>                    <propertyset>
+<a name="476"><font size=-1>476     </font></a>                        <propertyref prefix="test-sys-prop."/>
+<a name="477"><font size=-1>477     </font></a>                        <mapper from="test-sys-prop.*" to="*" type="glob"/>
+<a name="478"><font size=-1>478     </font></a>                    </propertyset>
+<a name="479"><font size=-1>479     </font></a>                    <customize/>
+<a name="480"><font size=-1>480     </font></a>                </testng>
+<a name="481"><font size=-1>481     </font></a>            </sequential>
+<a name="482"><font size=-1>482     </font></a>        </macrodef>
+<a name="483"><font size=-1>483     </font></a>    </target>
+<a name="484"><font size=-1>484     </font></a>    <target name="-init-macrodef-test-impl">
+<a name="485"><font size=-1>485     </font></a>        <macrodef name="test-impl" uri="http://www.netbeans.org/ns/web-project/2">
+<a name="486"><font size=-1>486     </font></a>            <attribute default="${includes}" name="includes"/>
+<a name="487"><font size=-1>487     </font></a>            <attribute default="${excludes}" name="excludes"/>
+<a name="488"><font size=-1>488     </font></a>            <attribute default="**" name="testincludes"/>
+<a name="489"><font size=-1>489     </font></a>            <attribute default="" name="testmethods"/>
+<a name="490"><font size=-1>490     </font></a>            <element implicit="true" name="customize" optional="true"/>
+<a name="491"><font size=-1>491     </font></a>            <sequential>
+<a name="492"><font size=-1>492     </font></a>                <echo>No tests executed.</echo>
+<a name="493"><font size=-1>493     </font></a>            </sequential>
+<a name="494"><font size=-1>494     </font></a>        </macrodef>
+<a name="495"><font size=-1>495     </font></a>    </target>
+<a name="496"><font size=-1>496     </font></a>    <target depends="-init-macrodef-junit" if="${junit.available}" name="-init-macrodef-junit-impl">
+<a name="497"><font size=-1>497     </font></a>        <macrodef name="test-impl" uri="http://www.netbeans.org/ns/web-project/2">
+<a name="498"><font size=-1>498     </font></a>            <attribute default="${includes}" name="includes"/>
+<a name="499"><font size=-1>499     </font></a>            <attribute default="${excludes}" name="excludes"/>
+<a name="500"><font size=-1>500     </font></a>            <attribute default="**" name="testincludes"/>
+<a name="501"><font size=-1>501     </font></a>            <attribute default="" name="testmethods"/>
+<a name="502"><font size=-1>502     </font></a>            <element implicit="true" name="customize" optional="true"/>
+<a name="503"><font size=-1>503     </font></a>            <sequential>
+<a name="504"><font size=-1>504     </font></a>                <webproject2:junit excludes="@{excludes}" includes="@{includes}" testincludes="@{testincludes}" testmethods="@{testmethods}">
+<a name="505"><font size=-1>505     </font></a>                    <customize/>
+<a name="506"><font size=-1>506     </font></a>                </webproject2:junit>
+<a name="507"><font size=-1>507     </font></a>            </sequential>
+<a name="508"><font size=-1>508     </font></a>        </macrodef>
+<a name="509"><font size=-1>509     </font></a>    </target>
+<a name="510"><font size=-1>510     </font></a>    <target depends="-init-macrodef-testng" if="${testng.available}" name="-init-macrodef-testng-impl">
+<a name="511"><font size=-1>511     </font></a>        <macrodef name="test-impl" uri="http://www.netbeans.org/ns/web-project/2">
+<a name="512"><font size=-1>512     </font></a>            <attribute default="${includes}" name="includes"/>
+<a name="513"><font size=-1>513     </font></a>            <attribute default="${excludes}" name="excludes"/>
+<a name="514"><font size=-1>514     </font></a>            <attribute default="**" name="testincludes"/>
+<a name="515"><font size=-1>515     </font></a>            <attribute default="" name="testmethods"/>
+<a name="516"><font size=-1>516     </font></a>            <element implicit="true" name="customize" optional="true"/>
+<a name="517"><font size=-1>517     </font></a>            <sequential>
+<a name="518"><font size=-1>518     </font></a>                <webproject2:testng excludes="@{excludes}" includes="@{includes}" testincludes="@{testincludes}" testmethods="@{testmethods}">
+<a name="519"><font size=-1>519     </font></a>                    <customize/>
+<a name="520"><font size=-1>520     </font></a>                </webproject2:testng>
+<a name="521"><font size=-1>521     </font></a>            </sequential>
+<a name="522"><font size=-1>522     </font></a>        </macrodef>
+<a name="523"><font size=-1>523     </font></a>    </target>
+<a name="524"><font size=-1>524     </font></a>    <target depends="-init-macrodef-test-impl,-init-macrodef-junit-impl,-init-macrodef-testng-impl" name="-init-macrodef-test">
+<a name="525"><font size=-1>525     </font></a>        <macrodef name="test" uri="http://www.netbeans.org/ns/web-project/2">
+<a name="526"><font size=-1>526     </font></a>            <attribute default="${includes}" name="includes"/>
+<a name="527"><font size=-1>527     </font></a>            <attribute default="${excludes}" name="excludes"/>
+<a name="528"><font size=-1>528     </font></a>            <attribute default="**" name="testincludes"/>
+<a name="529"><font size=-1>529     </font></a>            <attribute default="" name="testmethods"/>
+<a name="530"><font size=-1>530     </font></a>            <sequential>
+<a name="531"><font size=-1>531     </font></a>                <webproject2:test-impl excludes="@{excludes}" includes="@{includes}" testincludes="@{testincludes}" testmethods="@{testmethods}">
+<a name="532"><font size=-1>532     </font></a>                    <customize>
+<a name="533"><font size=-1>533     </font></a>                        <classpath>
+<a name="534"><font size=-1>534     </font></a>                            <path path="${run.test.classpath}:${j2ee.platform.classpath}:${j2ee.platform.embeddableejb.classpath}"/>
+<a name="535"><font size=-1>535     </font></a>                        </classpath>
+<a name="536"><font size=-1>536     </font></a>                        <jvmarg line="${endorsed.classpath.cmd.line.arg}"/>
+<a name="537"><font size=-1>537     </font></a>                        <jvmarg line="${runmain.jvmargs}"/>
+<a name="538"><font size=-1>538     </font></a>                    </customize>
+<a name="539"><font size=-1>539     </font></a>                </webproject2:test-impl>
+<a name="540"><font size=-1>540     </font></a>            </sequential>
+<a name="541"><font size=-1>541     </font></a>        </macrodef>
+<a name="542"><font size=-1>542     </font></a>    </target>
+<a name="543"><font size=-1>543     </font></a>    <target if="${junit.available}" name="-init-macrodef-junit-debug" unless="${nb.junit.batch}">
+<a name="544"><font size=-1>544     </font></a>        <macrodef name="junit-debug" uri="http://www.netbeans.org/ns/web-project/2">
+<a name="545"><font size=-1>545     </font></a>            <attribute default="${includes}" name="includes"/>
+<a name="546"><font size=-1>546     </font></a>            <attribute default="${excludes}" name="excludes"/>
+<a name="547"><font size=-1>547     </font></a>            <attribute default="**" name="testincludes"/>
+<a name="548"><font size=-1>548     </font></a>            <attribute default="" name="testmethods"/>
+<a name="549"><font size=-1>549     </font></a>            <element name="customize" optional="true"/>
+<a name="550"><font size=-1>550     </font></a>            <sequential>
+<a name="551"><font size=-1>551     </font></a>                <junit dir="${basedir}" errorproperty="tests.failed" failureproperty="tests.failed" fork="true" showoutput="true" tempdir="${java.io.tmpdir}">
+<a name="552"><font size=-1>552     </font></a>                    <test methods="@{testmethods}" name="@{testincludes}" todir="${build.test.results.dir}"/>
+<a name="553"><font size=-1>553     </font></a>                    <syspropertyset>
+<a name="554"><font size=-1>554     </font></a>                        <propertyref prefix="test-sys-prop."/>
+<a name="555"><font size=-1>555     </font></a>                        <mapper from="test-sys-prop.*" to="*" type="glob"/>
+<a name="556"><font size=-1>556     </font></a>                    </syspropertyset>
+<a name="557"><font size=-1>557     </font></a>                    <formatter type="brief" usefile="false"/>
+<a name="558"><font size=-1>558     </font></a>                    <formatter type="xml"/>
+<a name="559"><font size=-1>559     </font></a>                    <jvmarg value="-ea"/>
+<a name="560"><font size=-1>560     </font></a>                    <jvmarg line="${debug-args-line}"/>
+<a name="561"><font size=-1>561     </font></a>                    <jvmarg value="-Xrunjdwp:transport=${debug-transport},address=${jpda.address}"/>
+<a name="562"><font size=-1>562     </font></a>                    <customize/>
+<a name="563"><font size=-1>563     </font></a>                </junit>
+<a name="564"><font size=-1>564     </font></a>            </sequential>
+<a name="565"><font size=-1>565     </font></a>        </macrodef>
+<a name="566"><font size=-1>566     </font></a>    </target>
+<a name="567"><font size=-1>567     </font></a>    <target depends="-init-test-properties" if="${nb.junit.batch}" name="-init-macrodef-junit-debug-batch">
+<a name="568"><font size=-1>568     </font></a>        <macrodef name="junit-debug" uri="http://www.netbeans.org/ns/web-project/2">
+<a name="569"><font size=-1>569     </font></a>            <attribute default="${includes}" name="includes"/>
+<a name="570"><font size=-1>570     </font></a>            <attribute default="${excludes}" name="excludes"/>
+<a name="571"><font size=-1>571     </font></a>            <attribute default="**" name="testincludes"/>
+<a name="572"><font size=-1>572     </font></a>            <attribute default="" name="testmethods"/>
+<a name="573"><font size=-1>573     </font></a>            <element name="customize" optional="true"/>
+<a name="574"><font size=-1>574     </font></a>            <sequential>
+<a name="575"><font size=-1>575     </font></a>                <property name="run.jvmargs.ide" value=""/>
+<a name="576"><font size=-1>576     </font></a>                <junit dir="${basedir}" errorproperty="tests.failed" failureproperty="tests.failed" fork="true" showoutput="true" tempdir="${build.dir}">
+<a name="577"><font size=-1>577     </font></a>                    <batchtest todir="${build.test.results.dir}">
+<a name="578"><font size=-1>578     </font></a>                        <fileset dir="${test.src.dir}" excludes="@{excludes},${excludes}" includes="@{includes}">
+<a name="579"><font size=-1>579     </font></a>                            <filename name="@{testincludes}"/>
+<a name="580"><font size=-1>580     </font></a>                        </fileset>
+<a name="581"><font size=-1>581     </font></a>                        <fileset dir="${build.test.classes.dir}" excludes="@{excludes},${excludes},${test.binaryexcludes}" includes="${test.binaryincludes}">
+<a name="582"><font size=-1>582     </font></a>                            <filename name="${test.binarytestincludes}"/>
+<a name="583"><font size=-1>583     </font></a>                        </fileset>
+<a name="584"><font size=-1>584     </font></a>                    </batchtest>
+<a name="585"><font size=-1>585     </font></a>                    <syspropertyset>
+<a name="586"><font size=-1>586     </font></a>                        <propertyref prefix="test-sys-prop."/>
+<a name="587"><font size=-1>587     </font></a>                        <mapper from="test-sys-prop.*" to="*" type="glob"/>
+<a name="588"><font size=-1>588     </font></a>                    </syspropertyset>
+<a name="589"><font size=-1>589     </font></a>                    <formatter type="brief" usefile="false"/>
+<a name="590"><font size=-1>590     </font></a>                    <formatter type="xml"/>
+<a name="591"><font size=-1>591     </font></a>                    <jvmarg value="-ea"/>
+<a name="592"><font size=-1>592     </font></a>                    <jvmarg line="${run.jvmargs.ide}"/>
+<a name="593"><font size=-1>593     </font></a>                    <jvmarg line="${debug-args-line}"/>
+<a name="594"><font size=-1>594     </font></a>                    <jvmarg value="-Xrunjdwp:transport=${debug-transport},address=${jpda.address}"/>
+<a name="595"><font size=-1>595     </font></a>                    <customize/>
+<a name="596"><font size=-1>596     </font></a>                </junit>
+<a name="597"><font size=-1>597     </font></a>            </sequential>
+<a name="598"><font size=-1>598     </font></a>        </macrodef>
+<a name="599"><font size=-1>599     </font></a>    </target>
+<a name="600"><font size=-1>600     </font></a>    <target depends="-init-macrodef-junit-debug,-init-macrodef-junit-debug-batch" if="${junit.available}" name="-init-macrodef-junit-debug-impl">
+<a name="601"><font size=-1>601     </font></a>        <macrodef name="test-debug-impl" uri="http://www.netbeans.org/ns/web-project/2">
+<a name="602"><font size=-1>602     </font></a>            <attribute default="${includes}" name="includes"/>
+<a name="603"><font size=-1>603     </font></a>            <attribute default="${excludes}" name="excludes"/>
+<a name="604"><font size=-1>604     </font></a>            <attribute default="**" name="testincludes"/>
+<a name="605"><font size=-1>605     </font></a>            <attribute default="" name="testmethods"/>
+<a name="606"><font size=-1>606     </font></a>            <element implicit="true" name="customize" optional="true"/>
+<a name="607"><font size=-1>607     </font></a>            <sequential>
+<a name="608"><font size=-1>608     </font></a>                <webproject2:junit-debug excludes="@{excludes}" includes="@{includes}" testincludes="@{testincludes}" testmethods="@{testmethods}">
+<a name="609"><font size=-1>609     </font></a>                    <customize/>
+<a name="610"><font size=-1>610     </font></a>                </webproject2:junit-debug>
+<a name="611"><font size=-1>611     </font></a>            </sequential>
+<a name="612"><font size=-1>612     </font></a>        </macrodef>
+<a name="613"><font size=-1>613     </font></a>    </target>
+<a name="614"><font size=-1>614     </font></a>    <target if="${testng.available}" name="-init-macrodef-testng-debug">
+<a name="615"><font size=-1>615     </font></a>        <macrodef name="testng-debug" uri="http://www.netbeans.org/ns/web-project/2">
+<a name="616"><font size=-1>616     </font></a>            <attribute default="${main.class}" name="testClass"/>
+<a name="617"><font size=-1>617     </font></a>            <attribute default="" name="testMethod"/>
+<a name="618"><font size=-1>618     </font></a>            <element name="customize2" optional="true"/>
+<a name="619"><font size=-1>619     </font></a>            <sequential>
+<a name="620"><font size=-1>620     </font></a>                <condition else="-testclass @{testClass}" property="test.class.or.method" value="-methods @{testClass}.@{testMethod}">
+<a name="621"><font size=-1>621     </font></a>                    <isset property="test.method"/>
+<a name="622"><font size=-1>622     </font></a>                </condition>
+<a name="623"><font size=-1>623     </font></a>                <condition else="-suitename KySWeb -testname @{testClass} ${test.class.or.method}" property="testng.cmd.args" value="@{testClass}">
+<a name="624"><font size=-1>624     </font></a>                    <matches pattern=".*\.xml" string="@{testClass}"/>
+<a name="625"><font size=-1>625     </font></a>                </condition>
+<a name="626"><font size=-1>626     </font></a>                <delete dir="${build.test.results.dir}" quiet="true"/>
+<a name="627"><font size=-1>627     </font></a>                <mkdir dir="${build.test.results.dir}"/>
+<a name="628"><font size=-1>628     </font></a>                <webproject1:debug args="${testng.cmd.args}" classname="org.testng.TestNG" classpath="${debug.test.classpath}:${j2ee.platform.embeddableejb.classpath}">
+<a name="629"><font size=-1>629     </font></a>                    <customize>
+<a name="630"><font size=-1>630     </font></a>                        <customize2/>
+<a name="631"><font size=-1>631     </font></a>                        <jvmarg value="-ea"/>
+<a name="632"><font size=-1>632     </font></a>                        <arg line="${testng.debug.mode}"/>
+<a name="633"><font size=-1>633     </font></a>                        <arg line="-d ${build.test.results.dir}"/>
+<a name="634"><font size=-1>634     </font></a>                        <arg line="-listener org.testng.reporters.VerboseReporter"/>
+<a name="635"><font size=-1>635     </font></a>                    </customize>
+<a name="636"><font size=-1>636     </font></a>                </webproject1:debug>
+<a name="637"><font size=-1>637     </font></a>            </sequential>
+<a name="638"><font size=-1>638     </font></a>        </macrodef>
+<a name="639"><font size=-1>639     </font></a>    </target>
+<a name="640"><font size=-1>640     </font></a>    <target depends="-init-macrodef-testng-debug" if="${testng.available}" name="-init-macrodef-testng-debug-impl">
+<a name="641"><font size=-1>641     </font></a>        <macrodef name="testng-debug-impl" uri="http://www.netbeans.org/ns/web-project/2">
+<a name="642"><font size=-1>642     </font></a>            <attribute default="${main.class}" name="testClass"/>
+<a name="643"><font size=-1>643     </font></a>            <attribute default="" name="testMethod"/>
+<a name="644"><font size=-1>644     </font></a>            <element implicit="true" name="customize2" optional="true"/>
+<a name="645"><font size=-1>645     </font></a>            <sequential>
+<a name="646"><font size=-1>646     </font></a>                <webproject2:testng-debug testClass="@{testClass}" testMethod="@{testMethod}">
+<a name="647"><font size=-1>647     </font></a>                    <customize2/>
+<a name="648"><font size=-1>648     </font></a>                </webproject2:testng-debug>
+<a name="649"><font size=-1>649     </font></a>            </sequential>
+<a name="650"><font size=-1>650     </font></a>        </macrodef>
+<a name="651"><font size=-1>651     </font></a>    </target>
+<a name="652"><font size=-1>652     </font></a>    <target depends="-init-macrodef-junit-debug-impl" if="${junit.available}" name="-init-macrodef-test-debug-junit">
+<a name="653"><font size=-1>653     </font></a>        <macrodef name="test-debug" uri="http://www.netbeans.org/ns/web-project/2">
+<a name="654"><font size=-1>654     </font></a>            <attribute default="${includes}" name="includes"/>
+<a name="655"><font size=-1>655     </font></a>            <attribute default="${excludes}" name="excludes"/>
+<a name="656"><font size=-1>656     </font></a>            <attribute default="**" name="testincludes"/>
+<a name="657"><font size=-1>657     </font></a>            <attribute default="" name="testmethods"/>
+<a name="658"><font size=-1>658     </font></a>            <attribute default="${main.class}" name="testClass"/>
+<a name="659"><font size=-1>659     </font></a>            <attribute default="" name="testMethod"/>
+<a name="660"><font size=-1>660     </font></a>            <sequential>
+<a name="661"><font size=-1>661     </font></a>                <webproject2:test-debug-impl excludes="@{excludes}" includes="@{includes}" testincludes="@{testincludes}" testmethods="@{testmethods}">
+<a name="662"><font size=-1>662     </font></a>                    <customize>
+<a name="663"><font size=-1>663     </font></a>                        <classpath>
+<a name="664"><font size=-1>664     </font></a>                            <path path="${run.test.classpath}:${j2ee.platform.classpath}:${j2ee.platform.embeddableejb.classpath}"/>
+<a name="665"><font size=-1>665     </font></a>                        </classpath>
+<a name="666"><font size=-1>666     </font></a>                        <jvmarg line="${endorsed.classpath.cmd.line.arg}"/>
+<a name="667"><font size=-1>667     </font></a>                        <jvmarg line="${runmain.jvmargs}"/>
+<a name="668"><font size=-1>668     </font></a>                    </customize>
+<a name="669"><font size=-1>669     </font></a>                </webproject2:test-debug-impl>
+<a name="670"><font size=-1>670     </font></a>            </sequential>
+<a name="671"><font size=-1>671     </font></a>        </macrodef>
+<a name="672"><font size=-1>672     </font></a>    </target>
+<a name="673"><font size=-1>673     </font></a>    <target depends="-init-macrodef-testng-debug-impl" if="${testng.available}" name="-init-macrodef-test-debug-testng">
+<a name="674"><font size=-1>674     </font></a>        <macrodef name="test-debug" uri="http://www.netbeans.org/ns/web-project/2">
+<a name="675"><font size=-1>675     </font></a>            <attribute default="${includes}" name="includes"/>
+<a name="676"><font size=-1>676     </font></a>            <attribute default="${excludes}" name="excludes"/>
+<a name="677"><font size=-1>677     </font></a>            <attribute default="**" name="testincludes"/>
+<a name="678"><font size=-1>678     </font></a>            <attribute default="" name="testmethods"/>
+<a name="679"><font size=-1>679     </font></a>            <attribute default="${main.class}" name="testClass"/>
+<a name="680"><font size=-1>680     </font></a>            <attribute default="" name="testMethod"/>
+<a name="681"><font size=-1>681     </font></a>            <sequential>
+<a name="682"><font size=-1>682     </font></a>                <webproject2:testng-debug-impl testClass="@{testClass}" testMethod="@{testMethod}">
+<a name="683"><font size=-1>683     </font></a>                    <customize2>
+<a name="684"><font size=-1>684     </font></a>                        <syspropertyset>
+<a name="685"><font size=-1>685     </font></a>                            <propertyref prefix="test-sys-prop."/>
+<a name="686"><font size=-1>686     </font></a>                            <mapper from="test-sys-prop.*" to="*" type="glob"/>
+<a name="687"><font size=-1>687     </font></a>                        </syspropertyset>
+<a name="688"><font size=-1>688     </font></a>                    </customize2>
+<a name="689"><font size=-1>689     </font></a>                </webproject2:testng-debug-impl>
+<a name="690"><font size=-1>690     </font></a>            </sequential>
+<a name="691"><font size=-1>691     </font></a>        </macrodef>
+<a name="692"><font size=-1>692     </font></a>    </target>
+<a name="693"><font size=-1>693     </font></a>    <target depends="-init-macrodef-test-debug-junit,-init-macrodef-test-debug-testng" name="-init-macrodef-test-debug"/>
+<a name="694"><font size=-1>694     </font></a>    <target name="-init-macrodef-java">
+<a name="695"><font size=-1>695     </font></a>        <macrodef name="java" uri="http://www.netbeans.org/ns/web-project/1">
+<a name="696"><font size=-1>696     </font></a>            <attribute default="${main.class}" name="classname"/>
+<a name="697"><font size=-1>697     </font></a>            <attribute default="${debug.classpath}" name="classpath"/>
+<a name="698"><font size=-1>698     </font></a>            <element name="customize" optional="true"/>
+<a name="699"><font size=-1>699     </font></a>            <sequential>
+<a name="700"><font size=-1>700     </font></a>                <java classname="@{classname}" fork="true">
+<a name="701"><font size=-1>701     </font></a>                    <jvmarg line="${endorsed.classpath.cmd.line.arg}"/>
+<a name="702"><font size=-1>702     </font></a>                    <jvmarg line="${runmain.jvmargs}"/>
+<a name="703"><font size=-1>703     </font></a>                    <classpath>
+<a name="704"><font size=-1>704     </font></a>                        <path path="@{classpath}:${j2ee.platform.classpath}"/>
+<a name="705"><font size=-1>705     </font></a>                    </classpath>
+<a name="706"><font size=-1>706     </font></a>                    <syspropertyset>
+<a name="707"><font size=-1>707     </font></a>                        <propertyref prefix="run-sys-prop."/>
+<a name="708"><font size=-1>708     </font></a>                        <mapper from="run-sys-prop.*" to="*" type="glob"/>
+<a name="709"><font size=-1>709     </font></a>                    </syspropertyset>
+<a name="710"><font size=-1>710     </font></a>                    <customize/>
+<a name="711"><font size=-1>711     </font></a>                </java>
+<a name="712"><font size=-1>712     </font></a>            </sequential>
+<a name="713"><font size=-1>713     </font></a>        </macrodef>
+<a name="714"><font size=-1>714     </font></a>    </target>
+<a name="715"><font size=-1>715     </font></a>    <target name="-init-macrodef-nbjsdebug">
+<a name="716"><font size=-1>716     </font></a>        <macrodef name="nbjsdebugstart" uri="http://www.netbeans.org/ns/web-project/1">
+<a name="717"><font size=-1>717     </font></a>            <attribute default="${client.url}" name="webUrl"/>
+<a name="718"><font size=-1>718     </font></a>            <sequential>
+<a name="719"><font size=-1>719     </font></a>                <nbjsdebugstart urlPart="${client.urlPart}" webUrl="@{webUrl}"/>
+<a name="720"><font size=-1>720     </font></a>            </sequential>
+<a name="721"><font size=-1>721     </font></a>        </macrodef>
+<a name="722"><font size=-1>722     </font></a>    </target>
+<a name="723"><font size=-1>723     </font></a>    <target depends="-init-debug-args" name="-init-macrodef-nbjpda">
+<a name="724"><font size=-1>724     </font></a>        <macrodef name="nbjpdastart" uri="http://www.netbeans.org/ns/web-project/1">
+<a name="725"><font size=-1>725     </font></a>            <attribute default="${main.class}" name="name"/>
+<a name="726"><font size=-1>726     </font></a>            <attribute default="${debug.classpath}:${j2ee.platform.classpath}" name="classpath"/>
+<a name="727"><font size=-1>727     </font></a>            <sequential>
+<a name="728"><font size=-1>728     </font></a>                <nbjpdastart addressproperty="jpda.address" name="@{name}" transport="${debug-transport}">
+<a name="729"><font size=-1>729     </font></a>                    <classpath>
+<a name="730"><font size=-1>730     </font></a>                        <path path="@{classpath}"/>
+<a name="731"><font size=-1>731     </font></a>                    </classpath>
+<a name="732"><font size=-1>732     </font></a>                </nbjpdastart>
+<a name="733"><font size=-1>733     </font></a>            </sequential>
+<a name="734"><font size=-1>734     </font></a>        </macrodef>
+<a name="735"><font size=-1>735     </font></a>        <macrodef name="nbjpdareload" uri="http://www.netbeans.org/ns/web-project/1">
+<a name="736"><font size=-1>736     </font></a>            <attribute default="${build.classes.dir}" name="dir"/>
+<a name="737"><font size=-1>737     </font></a>            <sequential>
+<a name="738"><font size=-1>738     </font></a>                <nbjpdareload>
+<a name="739"><font size=-1>739     </font></a>                    <fileset dir="@{dir}" includes="${fix.classes}">
+<a name="740"><font size=-1>740     </font></a>                        <include name="${fix.includes}*.class"/>
+<a name="741"><font size=-1>741     </font></a>                    </fileset>
+<a name="742"><font size=-1>742     </font></a>                </nbjpdareload>
+<a name="743"><font size=-1>743     </font></a>            </sequential>
+<a name="744"><font size=-1>744     </font></a>        </macrodef>
+<a name="745"><font size=-1>745     </font></a>        <macrodef name="nbjpdaappreloaded" uri="http://www.netbeans.org/ns/web-project/1">
+<a name="746"><font size=-1>746     </font></a>            <sequential>
+<a name="747"><font size=-1>747     </font></a>                <nbjpdaappreloaded/>
+<a name="748"><font size=-1>748     </font></a>            </sequential>
+<a name="749"><font size=-1>749     </font></a>        </macrodef>
+<a name="750"><font size=-1>750     </font></a>    </target>
+<a name="751"><font size=-1>751     </font></a>    <target name="-init-debug-args">
+<a name="752"><font size=-1>752     </font></a>        <property name="version-output" value="java version &quot;${ant.java.version}"/>
+<a name="753"><font size=-1>753     </font></a>        <condition property="have-jdk-older-than-1.4">
+<a name="754"><font size=-1>754     </font></a>            <or>
+<a name="755"><font size=-1>755     </font></a>                <contains string="${version-output}" substring="java version &quot;1.0"/>
+<a name="756"><font size=-1>756     </font></a>                <contains string="${version-output}" substring="java version &quot;1.1"/>
+<a name="757"><font size=-1>757     </font></a>                <contains string="${version-output}" substring="java version &quot;1.2"/>
+<a name="758"><font size=-1>758     </font></a>                <contains string="${version-output}" substring="java version &quot;1.3"/>
+<a name="759"><font size=-1>759     </font></a>            </or>
+<a name="760"><font size=-1>760     </font></a>        </condition>
+<a name="761"><font size=-1>761     </font></a>        <condition else="-Xdebug" property="debug-args-line" value="-Xdebug -Xnoagent -Djava.compiler=none">
+<a name="762"><font size=-1>762     </font></a>            <istrue value="${have-jdk-older-than-1.4}"/>
+<a name="763"><font size=-1>763     </font></a>        </condition>
+<a name="764"><font size=-1>764     </font></a>        <condition else="dt_socket" property="debug-transport-by-os" value="dt_shmem">
+<a name="765"><font size=-1>765     </font></a>            <os family="windows"/>
+<a name="766"><font size=-1>766     </font></a>        </condition>
+<a name="767"><font size=-1>767     </font></a>        <condition else="${debug-transport-by-os}" property="debug-transport" value="${debug.transport}">
+<a name="768"><font size=-1>768     </font></a>            <isset property="debug.transport"/>
+<a name="769"><font size=-1>769     </font></a>        </condition>
+<a name="770"><font size=-1>770     </font></a>    </target>
+<a name="771"><font size=-1>771     </font></a>    <target depends="-init-debug-args" name="-init-macrodef-debug">
+<a name="772"><font size=-1>772     </font></a>        <macrodef name="debug" uri="http://www.netbeans.org/ns/web-project/1">
+<a name="773"><font size=-1>773     </font></a>            <attribute default="${main.class}" name="classname"/>
+<a name="774"><font size=-1>774     </font></a>            <attribute default="${debug.classpath}:${j2ee.platform.classpath}" name="classpath"/>
+<a name="775"><font size=-1>775     </font></a>            <attribute default="${application.args.param}" name="args"/>
+<a name="776"><font size=-1>776     </font></a>            <element name="customize" optional="true"/>
+<a name="777"><font size=-1>777     </font></a>            <sequential>
+<a name="778"><font size=-1>778     </font></a>                <java classname="@{classname}" fork="true">
+<a name="779"><font size=-1>779     </font></a>                    <jvmarg line="${endorsed.classpath.cmd.line.arg}"/>
+<a name="780"><font size=-1>780     </font></a>                    <jvmarg line="${debug-args-line}"/>
+<a name="781"><font size=-1>781     </font></a>                    <jvmarg value="-Xrunjdwp:transport=${debug-transport},address=${jpda.address}"/>
+<a name="782"><font size=-1>782     </font></a>                    <jvmarg line="${runmain.jvmargs}"/>
+<a name="783"><font size=-1>783     </font></a>                    <classpath>
+<a name="784"><font size=-1>784     </font></a>                        <path path="@{classpath}"/>
+<a name="785"><font size=-1>785     </font></a>                    </classpath>
+<a name="786"><font size=-1>786     </font></a>                    <syspropertyset>
+<a name="787"><font size=-1>787     </font></a>                        <propertyref prefix="run-sys-prop."/>
+<a name="788"><font size=-1>788     </font></a>                        <mapper from="run-sys-prop.*" to="*" type="glob"/>
+<a name="789"><font size=-1>789     </font></a>                    </syspropertyset>
+<a name="790"><font size=-1>790     </font></a>                    <arg line="@{args}"/>
+<a name="791"><font size=-1>791     </font></a>                    <customize/>
+<a name="792"><font size=-1>792     </font></a>                </java>
+<a name="793"><font size=-1>793     </font></a>            </sequential>
+<a name="794"><font size=-1>794     </font></a>        </macrodef>
+<a name="795"><font size=-1>795     </font></a>    </target>
+<a name="796"><font size=-1>796     </font></a>    <target name="-init-taskdefs">
+<a name="797"><font size=-1>797     </font></a>        <fail unless="libs.CopyLibs.classpath">
+<a name="798"><font size=-1>798     </font></a>The libs.CopyLibs.classpath property is not set up.
+<a name="799"><font size=-1>799     </font></a>This property must point to 
+<a name="800"><font size=-1>800     </font></a>org-netbeans-modules-java-j2seproject-copylibstask.jar file which is part
+<a name="801"><font size=-1>801     </font></a>of NetBeans IDE installation and is usually located at 
+<a name="802"><font size=-1>802     </font></a>&lt;netbeans_installation&gt;/java&lt;version&gt;/ant/extra folder.
+<a name="803"><font size=-1>803     </font></a>Either open the project in the IDE and make sure CopyLibs library
+<a name="804"><font size=-1>804     </font></a>exists or setup the property manually. For example like this:
+<a name="805"><font size=-1>805     </font></a> ant -Dlibs.CopyLibs.classpath=a/path/to/org-netbeans-modules-java-j2seproject-copylibstask.jar
+<a name="806"><font size=-1>806     </font></a>                </fail>
+<a name="807"><font size=-1>807     </font></a>        <taskdef classpath="${libs.CopyLibs.classpath}" resource="org/netbeans/modules/java/j2seproject/copylibstask/antlib.xml"/>
+<a name="808"><font size=-1>808     </font></a>    </target>
+<a name="809"><font size=-1>809     </font></a>    <target name="-init-ap-cmdline-properties">
+<a name="810"><font size=-1>810     </font></a>        <property name="annotation.processing.enabled" value="true"/>
+<a name="811"><font size=-1>811     </font></a>        <property name="annotation.processing.processors.list" value=""/>
+<a name="812"><font size=-1>812     </font></a>        <property name="annotation.processing.run.all.processors" value="true"/>
+<a name="813"><font size=-1>813     </font></a>        <property name="javac.processorpath" value="${javac.classpath}"/>
+<a name="814"><font size=-1>814     </font></a>        <property name="javac.test.processorpath" value="${javac.test.classpath}"/>
+<a name="815"><font size=-1>815     </font></a>        <condition property="ap.supported.internal" value="true">
+<a name="816"><font size=-1>816     </font></a>            <not>
+<a name="817"><font size=-1>817     </font></a>                <matches pattern="1\.[0-5](\..*)?" string="${javac.source}"/>
+<a name="818"><font size=-1>818     </font></a>            </not>
+<a name="819"><font size=-1>819     </font></a>        </condition>
+<a name="820"><font size=-1>820     </font></a>    </target>
+<a name="821"><font size=-1>821     </font></a>    <target depends="-init-ap-cmdline-properties" if="ap.supported.internal" name="-init-ap-cmdline-supported">
+<a name="822"><font size=-1>822     </font></a>        <condition else="" property="ap.processors.internal" value="-processor ${annotation.processing.processors.list}">
+<a name="823"><font size=-1>823     </font></a>            <isfalse value="${annotation.processing.run.all.processors}"/>
+<a name="824"><font size=-1>824     </font></a>        </condition>
+<a name="825"><font size=-1>825     </font></a>        <condition else="" property="ap.proc.none.internal" value="-proc:none">
+<a name="826"><font size=-1>826     </font></a>            <isfalse value="${annotation.processing.enabled}"/>
+<a name="827"><font size=-1>827     </font></a>        </condition>
+<a name="828"><font size=-1>828     </font></a>    </target>
+<a name="829"><font size=-1>829     </font></a>    <target depends="-init-ap-cmdline-properties,-init-ap-cmdline-supported" name="-init-ap-cmdline">
+<a name="830"><font size=-1>830     </font></a>        <property name="ap.cmd.line.internal" value=""/>
+<a name="831"><font size=-1>831     </font></a>    </target>
+<a name="832"><font size=-1>832     </font></a>    <!--
+<a name="833"><font size=-1>833     </font></a>                pre NB7.2 profiling section; consider it deprecated
+<a name="834"><font size=-1>834     </font></a>            -->
+<a name="835"><font size=-1>835     </font></a>    <target depends="-profile-pre-init, init, -profile-post-init, -profile-init-check" if="profiler.info.jvmargs.agent" name="profile-init"/>
+<a name="836"><font size=-1>836     </font></a>    <target if="profiler.info.jvmargs.agent" name="-profile-pre-init">
+<a name="837"><font size=-1>837     </font></a>        <!-- Empty placeholder for easier customization. -->
+<a name="838"><font size=-1>838     </font></a>        <!-- You can override this target in the ../build.xml file. -->
+<a name="839"><font size=-1>839     </font></a>    </target>
+<a name="840"><font size=-1>840     </font></a>    <target if="profiler.info.jvmargs.agent" name="-profile-post-init">
+<a name="841"><font size=-1>841     </font></a>        <!-- Empty placeholder for easier customization. -->
+<a name="842"><font size=-1>842     </font></a>        <!-- You can override this target in the ../build.xml file. -->
+<a name="843"><font size=-1>843     </font></a>    </target>
+<a name="844"><font size=-1>844     </font></a>    <target depends="-profile-pre-init, init, -profile-post-init" if="profiler.info.jvmargs.agent" name="-profile-init-check">
+<a name="845"><font size=-1>845     </font></a>        <fail unless="profiler.info.jvm">Must set JVM to use for profiling in profiler.info.jvm</fail>
+<a name="846"><font size=-1>846     </font></a>        <fail unless="profiler.info.jvmargs.agent">Must set profiler agent JVM arguments in profiler.info.jvmargs.agent</fail>
+<a name="847"><font size=-1>847     </font></a>    </target>
+<a name="848"><font size=-1>848     </font></a>    <!--
+<a name="849"><font size=-1>849     </font></a>                end of pre NB7.2 profiling section
+<a name="850"><font size=-1>850     </font></a>            -->
+<a name="851"><font size=-1>851     </font></a>    <target depends="-pre-init,-init-private,-init-user,-init-project,-do-init,-post-init,-init-check,-init-macrodef-property,-init-macrodef-javac,-init-macrodef-test,-init-macrodef-test-debug,-init-macrodef-java,-init-macrodef-nbjpda,-init-macrodef-nbjsdebug,-init-macrodef-debug,-init-taskdefs,-init-ap-cmdline" name="init"/>
+<a name="852"><font size=-1>852     </font></a>    <!--
+<a name="853"><font size=-1>853     </font></a>                COMPILATION SECTION
+<a name="854"><font size=-1>854     </font></a>            -->
+<a name="855"><font size=-1>855     </font></a>    <target depends="init" if="no.dist.ear.dir" name="deps-module-jar" unless="no.deps"/>
+<a name="856"><font size=-1>856     </font></a>    <target depends="init" if="dist.ear.dir" name="deps-ear-jar" unless="no.deps"/>
+<a name="857"><font size=-1>857     </font></a>    <target depends="init, deps-module-jar, deps-ear-jar" name="deps-jar" unless="no.deps"/>
+<a name="858"><font size=-1>858     </font></a>    <target depends="init,deps-jar" name="-pre-pre-compile">
+<a name="859"><font size=-1>859     </font></a>        <mkdir dir="${build.classes.dir}"/>
+<a name="860"><font size=-1>860     </font></a>    </target>
+<a name="861"><font size=-1>861     </font></a>    <target name="-pre-compile">
+<a name="862"><font size=-1>862     </font></a>        <!-- Empty placeholder for easier customization. -->
+<a name="863"><font size=-1>863     </font></a>        <!-- You can override this target in the ../build.xml file. -->
+<a name="864"><font size=-1>864     </font></a>    </target>
+<a name="865"><font size=-1>865     </font></a>    <target name="-copy-webdir">
+<a name="866"><font size=-1>866     </font></a>        <copy todir="${build.web.dir}">
+<a name="867"><font size=-1>867     </font></a>            <fileset dir="${web.docbase.dir}" excludes="${build.web.excludes},${excludes}" includes="${includes}"/>
+<a name="868"><font size=-1>868     </font></a>        </copy>
+<a name="869"><font size=-1>869     </font></a>        <copy todir="${build.web.dir}/WEB-INF">
+<a name="870"><font size=-1>870     </font></a>            <fileset dir="${webinf.dir}" excludes="${build.web.excludes}"/>
+<a name="871"><font size=-1>871     </font></a>        </copy>
+<a name="872"><font size=-1>872     </font></a>    </target>
+<a name="873"><font size=-1>873     </font></a>    <target depends="init, deps-jar, -pre-pre-compile, -pre-compile, -copy-manifest, -copy-persistence-xml, -copy-webdir, library-inclusion-in-archive,library-inclusion-in-manifest" if="have.sources" name="-do-compile">
+<a name="874"><font size=-1>874     </font></a>        <webproject2:javac destdir="${build.classes.dir}" gensrcdir="${build.generated.sources.dir}"/>
+<a name="875"><font size=-1>875     </font></a>        <copy todir="${build.classes.dir}">
+<a name="876"><font size=-1>876     </font></a>            <fileset dir="${src.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
+<a name="877"><font size=-1>877     </font></a>        </copy>
+<a name="878"><font size=-1>878     </font></a>    </target>
+<a name="879"><font size=-1>879     </font></a>    <target if="has.custom.manifest" name="-copy-manifest">
+<a name="880"><font size=-1>880     </font></a>        <mkdir dir="${build.meta.inf.dir}"/>
+<a name="881"><font size=-1>881     </font></a>        <copy todir="${build.meta.inf.dir}">
+<a name="882"><font size=-1>882     </font></a>            <fileset dir="${conf.dir}" includes="MANIFEST.MF"/>
+<a name="883"><font size=-1>883     </font></a>        </copy>
+<a name="884"><font size=-1>884     </font></a>    </target>
+<a name="885"><font size=-1>885     </font></a>    <target if="has.persistence.xml" name="-copy-persistence-xml">
+<a name="886"><font size=-1>886     </font></a>        <mkdir dir="${build.web.dir}/WEB-INF/classes/META-INF"/>
+<a name="887"><font size=-1>887     </font></a>        <copy todir="${build.web.dir}/WEB-INF/classes/META-INF">
+<a name="888"><font size=-1>888     </font></a>            <fileset dir="${persistence.xml.dir}" includes="persistence.xml orm.xml"/>
+<a name="889"><font size=-1>889     </font></a>        </copy>
+<a name="890"><font size=-1>890     </font></a>    </target>
+<a name="891"><font size=-1>891     </font></a>    <target name="-post-compile">
+<a name="892"><font size=-1>892     </font></a>        <!-- Empty placeholder for easier customization. -->
+<a name="893"><font size=-1>893     </font></a>        <!-- You can override this target in the ../build.xml file. -->
+<a name="894"><font size=-1>894     </font></a>    </target>
+<a name="895"><font size=-1>895     </font></a>    <target depends="init,deps-jar,-pre-pre-compile,-pre-compile,-do-compile,-post-compile" description="Compile project." name="compile"/>
+<a name="896"><font size=-1>896     </font></a>    <target name="-pre-compile-single">
+<a name="897"><font size=-1>897     </font></a>        <!-- Empty placeholder for easier customization. -->
+<a name="898"><font size=-1>898     </font></a>        <!-- You can override this target in the ../build.xml file. -->
+<a name="899"><font size=-1>899     </font></a>    </target>
+<a name="900"><font size=-1>900     </font></a>    <target depends="init,deps-jar,-pre-pre-compile" name="-do-compile-single">
+<a name="901"><font size=-1>901     </font></a>        <fail unless="javac.includes">Must select some files in the IDE or set javac.includes</fail>
+<a name="902"><font size=-1>902     </font></a>        <webproject2:javac excludes="" gensrcdir="${build.generated.sources.dir}" includes="${javac.includes}"/>
+<a name="903"><font size=-1>903     </font></a>        <copy todir="${build.classes.dir}">
+<a name="904"><font size=-1>904     </font></a>            <fileset dir="${src.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
+<a name="905"><font size=-1>905     </font></a>        </copy>
+<a name="906"><font size=-1>906     </font></a>    </target>
+<a name="907"><font size=-1>907     </font></a>    <target name="-post-compile-single">
+<a name="908"><font size=-1>908     </font></a>        <!-- Empty placeholder for easier customization. -->
+<a name="909"><font size=-1>909     </font></a>        <!-- You can override this target in the ../build.xml file. -->
+<a name="910"><font size=-1>910     </font></a>    </target>
+<a name="911"><font size=-1>911     </font></a>    <target depends="init,deps-jar,-pre-pre-compile,-pre-compile-single,-do-compile-single,-post-compile-single" name="compile-single"/>
+<a name="912"><font size=-1>912     </font></a>    <property name="jspc.schemas" value="/resources/schemas/"/>
+<a name="913"><font size=-1>913     </font></a>    <property name="jspc.dtds" value="/resources/dtds/"/>
+<a name="914"><font size=-1>914     </font></a>    <target depends="compile" description="Test compile JSP pages to expose compilation errors." if="do.compile.jsps" name="compile-jsps">
+<a name="915"><font size=-1>915     </font></a>        <mkdir dir="${build.generated.dir}/src"/>
+<a name="916"><font size=-1>916     </font></a>        <java classname="org.netbeans.modules.web.project.ant.JspC" failonerror="true" fork="true">
+<a name="917"><font size=-1>917     </font></a>            <arg value="-uriroot"/>
+<a name="918"><font size=-1>918     </font></a>            <arg file="${basedir}/${build.web.dir}"/>
+<a name="919"><font size=-1>919     </font></a>            <arg value="-d"/>
+<a name="920"><font size=-1>920     </font></a>            <arg file="${basedir}/${build.generated.dir}/src"/>
+<a name="921"><font size=-1>921     </font></a>            <arg value="-die1"/>
+<a name="922"><font size=-1>922     </font></a>            <arg value="-schemas ${jspc.schemas}"/>
+<a name="923"><font size=-1>923     </font></a>            <arg value="-dtds ${jspc.dtds}"/>
+<a name="924"><font size=-1>924     </font></a>            <arg value="-compilerSourceVM ${javac.source}"/>
+<a name="925"><font size=-1>925     </font></a>            <arg value="-compilerTargetVM ${javac.target}"/>
+<a name="926"><font size=-1>926     </font></a>            <arg value="-javaEncoding ${source.encoding}"/>
+<a name="927"><font size=-1>927     </font></a>            <arg value="-sysClasspath ${libs.jsp-compilation-syscp.classpath}"/>
+<a name="928"><font size=-1>928     </font></a>            <classpath path="${java.home}/../lib/tools.jar:${libs.jsp-compiler.classpath}:${libs.jsp-compilation.classpath}"/>
+<a name="929"><font size=-1>929     </font></a>        </java>
+<a name="930"><font size=-1>930     </font></a>        <mkdir dir="${build.generated.dir}/classes"/>
+<a name="931"><font size=-1>931     </font></a>        <webproject2:javac classpath="${build.classes.dir}:${libs.jsp-compilation.classpath}:${javac.classpath}:${j2ee.platform.classpath}" destdir="${build.generated.dir}/classes" srcdir="${build.generated.dir}/src"/>
+<a name="932"><font size=-1>932     </font></a>    </target>
+<a name="933"><font size=-1>933     </font></a>    <target depends="compile" if="jsp.includes" name="-do-compile-single-jsp">
+<a name="934"><font size=-1>934     </font></a>        <fail unless="javac.jsp.includes">Must select some files in the IDE or set javac.jsp.includes</fail>
+<a name="935"><font size=-1>935     </font></a>        <mkdir dir="${build.generated.dir}/src"/>
+<a name="936"><font size=-1>936     </font></a>        <java classname="org.netbeans.modules.web.project.ant.JspCSingle" failonerror="true" fork="true">
+<a name="937"><font size=-1>937     </font></a>            <arg value="-uriroot"/>
+<a name="938"><font size=-1>938     </font></a>            <arg file="${basedir}/${build.web.dir}"/>
+<a name="939"><font size=-1>939     </font></a>            <arg value="-d"/>
+<a name="940"><font size=-1>940     </font></a>            <arg file="${basedir}/${build.generated.dir}/src"/>
+<a name="941"><font size=-1>941     </font></a>            <arg value="-die1"/>
+<a name="942"><font size=-1>942     </font></a>            <arg value="-schemas ${jspc.schemas}"/>
+<a name="943"><font size=-1>943     </font></a>            <arg value="-dtds ${jspc.dtds}"/>
+<a name="944"><font size=-1>944     </font></a>            <arg value="-sysClasspath ${libs.jsp-compilation-syscp.classpath}"/>
+<a name="945"><font size=-1>945     </font></a>            <arg value="-jspc.files"/>
+<a name="946"><font size=-1>946     </font></a>            <arg path="${jsp.includes}"/>
+<a name="947"><font size=-1>947     </font></a>            <arg value="-compilerSourceVM ${javac.source}"/>
+<a name="948"><font size=-1>948     </font></a>            <arg value="-compilerTargetVM ${javac.target}"/>
+<a name="949"><font size=-1>949     </font></a>            <arg value="-javaEncoding ${source.encoding}"/>
+<a name="950"><font size=-1>950     </font></a>            <classpath path="${java.home}/../lib/tools.jar:${libs.jsp-compiler.classpath}:${libs.jsp-compilation.classpath}"/>
+<a name="951"><font size=-1>951     </font></a>        </java>
+<a name="952"><font size=-1>952     </font></a>        <mkdir dir="${build.generated.dir}/classes"/>
+<a name="953"><font size=-1>953     </font></a>        <webproject2:javac classpath="${build.classes.dir}:${libs.jsp-compilation.classpath}:${javac.classpath}:${j2ee.platform.classpath}" destdir="${build.generated.dir}/classes" srcdir="${build.generated.dir}/src">
+<a name="954"><font size=-1>954     </font></a>            <customize>
+<a name="955"><font size=-1>955     </font></a>                <patternset includes="${javac.jsp.includes}"/>
+<a name="956"><font size=-1>956     </font></a>            </customize>
+<a name="957"><font size=-1>957     </font></a>        </webproject2:javac>
+<a name="958"><font size=-1>958     </font></a>    </target>
+<a name="959"><font size=-1>959     </font></a>    <target name="compile-single-jsp">
+<a name="960"><font size=-1>960     </font></a>        <fail unless="jsp.includes">Must select a file in the IDE or set jsp.includes</fail>
+<a name="961"><font size=-1>961     </font></a>        <antcall target="-do-compile-single-jsp"/>
+<a name="962"><font size=-1>962     </font></a>    </target>
+<a name="963"><font size=-1>963     </font></a>    <!--
+<a name="964"><font size=-1>964     </font></a>                DIST BUILDING SECTION
+<a name="965"><font size=-1>965     </font></a>            -->
+<a name="966"><font size=-1>966     </font></a>    <target name="-pre-dist">
+<a name="967"><font size=-1>967     </font></a>        <!-- Empty placeholder for easier customization. -->
+<a name="968"><font size=-1>968     </font></a>        <!-- You can override this target in the ../build.xml file. -->
+<a name="969"><font size=-1>969     </font></a>    </target>
+<a name="970"><font size=-1>970     </font></a>    <target depends="init,compile,compile-jsps,-pre-dist" if="do.war.package.without.custom.manifest" name="-do-dist-without-manifest">
+<a name="971"><font size=-1>971     </font></a>        <dirname file="${dist.war}" property="dist.jar.dir"/>
+<a name="972"><font size=-1>972     </font></a>        <mkdir dir="${dist.jar.dir}"/>
+<a name="973"><font size=-1>973     </font></a>        <jar compress="${jar.compress}" jarfile="${dist.war}">
+<a name="974"><font size=-1>974     </font></a>            <fileset dir="${build.web.dir}" excludes="WEB-INF/classes/.netbeans_*,${dist.archive.excludes}"/>
+<a name="975"><font size=-1>975     </font></a>        </jar>
+<a name="976"><font size=-1>976     </font></a>    </target>
+<a name="977"><font size=-1>977     </font></a>    <target depends="init,compile,compile-jsps,-pre-dist" if="do.war.package.with.custom.manifest" name="-do-dist-with-manifest">
+<a name="978"><font size=-1>978     </font></a>        <dirname file="${dist.war}" property="dist.jar.dir"/>
+<a name="979"><font size=-1>979     </font></a>        <mkdir dir="${dist.jar.dir}"/>
+<a name="980"><font size=-1>980     </font></a>        <jar compress="${jar.compress}" jarfile="${dist.war}" manifest="${build.meta.inf.dir}/MANIFEST.MF">
+<a name="981"><font size=-1>981     </font></a>            <fileset dir="${build.web.dir}" excludes="WEB-INF/classes/.netbeans_*,${dist.archive.excludes}"/>
+<a name="982"><font size=-1>982     </font></a>        </jar>
+<a name="983"><font size=-1>983     </font></a>    </target>
+<a name="984"><font size=-1>984     </font></a>    <target depends="init,compile,compile-jsps,-pre-dist" if="do.tmp.war.package.without.custom.manifest" name="-do-tmp-dist-without-manifest">
+<a name="985"><font size=-1>985     </font></a>        <dirname file="${dist.war}" property="dist.jar.dir"/>
+<a name="986"><font size=-1>986     </font></a>        <mkdir dir="${dist.jar.dir}"/>
+<a name="987"><font size=-1>987     </font></a>        <jar compress="${jar.compress}" jarfile="${dist.war}">
+<a name="988"><font size=-1>988     </font></a>            <fileset dir="${build.web.dir}" excludes="WEB-INF/classes/.netbeans_*,${dist.archive.excludes}"/>
+<a name="989"><font size=-1>989     </font></a>        </jar>
+<a name="990"><font size=-1>990     </font></a>    </target>
+<a name="991"><font size=-1>991     </font></a>    <target depends="init,compile,compile-jsps,-pre-dist" if="do.tmp.war.package.with.custom.manifest" name="-do-tmp-dist-with-manifest">
+<a name="992"><font size=-1>992     </font></a>        <dirname file="${dist.war}" property="dist.jar.dir"/>
+<a name="993"><font size=-1>993     </font></a>        <mkdir dir="${dist.jar.dir}"/>
+<a name="994"><font size=-1>994     </font></a>        <jar compress="${jar.compress}" jarfile="${dist.war}" manifest="${build.meta.inf.dir}/MANIFEST.MF">
+<a name="995"><font size=-1>995     </font></a>            <fileset dir="${build.web.dir}" excludes="WEB-INF/classes/.netbeans_*,${dist.archive.excludes}"/>
+<a name="996"><font size=-1>996     </font></a>        </jar>
+<a name="997"><font size=-1>997     </font></a>    </target>
+<a name="998"><font size=-1>998     </font></a>    <target depends="init,compile,compile-jsps,-pre-dist,-do-dist-with-manifest,-do-dist-without-manifest" name="do-dist"/>
+<a name="999"><font size=-1>999     </font></a>    <target depends="init" if="dist.ear.dir" name="library-inclusion-in-manifest">
+<a name="1000"><font size=-1>1000     </font></a>        <copyfiles files="${file.reference.mysql-connector-java-5.1.49-bin.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
+<a name="1001"><font size=-1>1001     </font></a>        <copyfiles files="${file.reference.javax.mail.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
+<a name="1002"><font size=-1>1002     </font></a>        <mkdir dir="${build.web.dir}/META-INF"/>
+<a name="1003"><font size=-1>1003     </font></a>        <manifest file="${build.web.dir}/META-INF/MANIFEST.MF" mode="update"/>
+<a name="1004"><font size=-1>1004     </font></a>    </target>
+<a name="1005"><font size=-1>1005     </font></a>    <target depends="init" name="library-inclusion-in-archive" unless="dist.ear.dir">
+<a name="1006"><font size=-1>1006     </font></a>        <copyfiles files="${file.reference.mysql-connector-java-5.1.49-bin.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
+<a name="1007"><font size=-1>1007     </font></a>        <copyfiles files="${file.reference.javax.mail.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
+<a name="1008"><font size=-1>1008     </font></a>    </target>
+<a name="1009"><font size=-1>1009     </font></a>    <target depends="init" if="dist.ear.dir" name="-clean-webinf-lib">
+<a name="1010"><font size=-1>1010     </font></a>        <delete dir="${build.web.dir}/WEB-INF/lib"/>
+<a name="1011"><font size=-1>1011     </font></a>    </target>
+<a name="1012"><font size=-1>1012     </font></a>    <target depends="init,-clean-webinf-lib,compile,compile-jsps,-pre-dist,library-inclusion-in-manifest" if="do.tmp.war.package" name="do-ear-dist">
+<a name="1013"><font size=-1>1013     </font></a>        <dirname file="${dist.ear.war}" property="dist.jar.dir"/>
+<a name="1014"><font size=-1>1014     </font></a>        <mkdir dir="${dist.jar.dir}"/>
+<a name="1015"><font size=-1>1015     </font></a>        <jar compress="${jar.compress}" jarfile="${dist.ear.war}" manifest="${build.web.dir}/META-INF/MANIFEST.MF">
+<a name="1016"><font size=-1>1016     </font></a>            <fileset dir="${build.web.dir}" excludes="WEB-INF/classes/.netbeans_*,${dist.archive.excludes}"/>
+<a name="1017"><font size=-1>1017     </font></a>        </jar>
+<a name="1018"><font size=-1>1018     </font></a>    </target>
+<a name="1019"><font size=-1>1019     </font></a>    <target name="-post-dist">
+<a name="1020"><font size=-1>1020     </font></a>        <!-- Empty placeholder for easier customization. -->
+<a name="1021"><font size=-1>1021     </font></a>        <!-- You can override this target in the ../build.xml file. -->
+<a name="1022"><font size=-1>1022     </font></a>    </target>
+<a name="1023"><font size=-1>1023     </font></a>    <target depends="init,compile,-pre-dist,do-dist,-post-dist" description="Build distribution (WAR)." name="dist"/>
+<a name="1024"><font size=-1>1024     </font></a>    <target depends="init,-clean-webinf-lib,-init-cos,compile,-pre-dist,do-ear-dist,-post-dist" description="Build distribution (WAR) to be packaged into an EAR." name="dist-ear"/>
+<a name="1025"><font size=-1>1025     </font></a>    <!--
+<a name="1026"><font size=-1>1026     </font></a>                EXECUTION SECTION
+<a name="1027"><font size=-1>1027     </font></a>            -->
+<a name="1028"><font size=-1>1028     </font></a>    <target depends="run-deploy,run-display-browser" description="Deploy to server and show in browser." name="run"/>
+<a name="1029"><font size=-1>1029     </font></a>    <target name="-pre-run-deploy">
+<a name="1030"><font size=-1>1030     </font></a>        <!-- Empty placeholder for easier customization. -->
+<a name="1031"><font size=-1>1031     </font></a>        <!-- You can override this target in the ../build.xml file. -->
+<a name="1032"><font size=-1>1032     </font></a>    </target>
+<a name="1033"><font size=-1>1033     </font></a>    <target name="-post-run-deploy">
+<a name="1034"><font size=-1>1034     </font></a>        <!-- Empty placeholder for easier customization. -->
+<a name="1035"><font size=-1>1035     </font></a>        <!-- You can override this target in the ../build.xml file. -->
+<a name="1036"><font size=-1>1036     </font></a>    </target>
+<a name="1037"><font size=-1>1037     </font></a>    <target name="-pre-nbmodule-run-deploy">
+<a name="1038"><font size=-1>1038     </font></a>        <!-- Empty placeholder for easier customization. -->
+<a name="1039"><font size=-1>1039     </font></a>        <!-- This target can be overriden by NetBeans modules. Don't override it directly, use -pre-run-deploy task instead. -->
+<a name="1040"><font size=-1>1040     </font></a>    </target>
+<a name="1041"><font size=-1>1041     </font></a>    <target name="-post-nbmodule-run-deploy">
+<a name="1042"><font size=-1>1042     </font></a>        <!-- Empty placeholder for easier customization. -->
+<a name="1043"><font size=-1>1043     </font></a>        <!-- This target can be overriden by NetBeans modules. Don't override it directly, use -post-run-deploy task instead. -->
+<a name="1044"><font size=-1>1044     </font></a>    </target>
+<a name="1045"><font size=-1>1045     </font></a>    <target name="-run-deploy-am">
+<a name="1046"><font size=-1>1046     </font></a>        <!-- Task to deploy to the Access Manager runtime. -->
+<a name="1047"><font size=-1>1047     </font></a>    </target>
+<a name="1048"><font size=-1>1048     </font></a>    <target depends="init,-init-cos,compile,compile-jsps,-do-compile-single-jsp,-pre-dist,-do-tmp-dist-with-manifest,-do-tmp-dist-without-manifest,-pre-run-deploy,-pre-nbmodule-run-deploy,-run-deploy-nb,-init-deploy-ant,-deploy-ant,-run-deploy-am,-post-nbmodule-run-deploy,-post-run-deploy,-do-update-breakpoints" name="run-deploy"/>
+<a name="1049"><font size=-1>1049     </font></a>    <target if="netbeans.home" name="-run-deploy-nb">
+<a name="1050"><font size=-1>1050     </font></a>        <nbdeploy clientUrlPart="${client.urlPart}" debugmode="false" forceRedeploy="${forceRedeploy}"/>
+<a name="1051"><font size=-1>1051     </font></a>    </target>
+<a name="1052"><font size=-1>1052     </font></a>    <target name="-init-deploy-ant" unless="netbeans.home">
+<a name="1053"><font size=-1>1053     </font></a>        <property name="deploy.ant.archive" value="${dist.war}"/>
+<a name="1054"><font size=-1>1054     </font></a>        <property name="deploy.ant.docbase.dir" value="${web.docbase.dir}"/>
+<a name="1055"><font size=-1>1055     </font></a>        <property name="deploy.ant.resource.dir" value="${resource.dir}"/>
+<a name="1056"><font size=-1>1056     </font></a>        <property name="deploy.ant.enabled" value="true"/>
+<a name="1057"><font size=-1>1057     </font></a>    </target>
+<a name="1058"><font size=-1>1058     </font></a>    <target depends="dist,-run-undeploy-nb,-init-deploy-ant,-undeploy-ant" name="run-undeploy"/>
+<a name="1059"><font size=-1>1059     </font></a>    <target if="netbeans.home" name="-run-undeploy-nb">
+<a name="1060"><font size=-1>1060     </font></a>        <fail message="Undeploy is not supported from within the IDE"/>
+<a name="1061"><font size=-1>1061     </font></a>    </target>
+<a name="1062"><font size=-1>1062     </font></a>    <target depends="init,-pre-dist,dist,-post-dist" name="verify">
+<a name="1063"><font size=-1>1063     </font></a>        <nbverify file="${dist.war}"/>
+<a name="1064"><font size=-1>1064     </font></a>    </target>
+<a name="1065"><font size=-1>1065     </font></a>    <target depends="run-deploy,-init-display-browser,-display-browser-nb-old,-display-browser-nb,-display-browser-cl" name="run-display-browser"/>
+<a name="1066"><font size=-1>1066     </font></a>    <target if="do.display.browser" name="-init-display-browser">
+<a name="1067"><font size=-1>1067     </font></a>        <condition property="do.display.browser.nb.old">
+<a name="1068"><font size=-1>1068     </font></a>            <and>
+<a name="1069"><font size=-1>1069     </font></a>                <isset property="netbeans.home"/>
+<a name="1070"><font size=-1>1070     </font></a>                <not>
+<a name="1071"><font size=-1>1071     </font></a>                    <isset property="browser.context"/>
+<a name="1072"><font size=-1>1072     </font></a>                </not>
+<a name="1073"><font size=-1>1073     </font></a>            </and>
+<a name="1074"><font size=-1>1074     </font></a>        </condition>
+<a name="1075"><font size=-1>1075     </font></a>        <condition property="do.display.browser.nb">
+<a name="1076"><font size=-1>1076     </font></a>            <and>
+<a name="1077"><font size=-1>1077     </font></a>                <isset property="netbeans.home"/>
+<a name="1078"><font size=-1>1078     </font></a>                <isset property="browser.context"/>
+<a name="1079"><font size=-1>1079     </font></a>            </and>
+<a name="1080"><font size=-1>1080     </font></a>        </condition>
+<a name="1081"><font size=-1>1081     </font></a>        <condition property="do.display.browser.cl">
+<a name="1082"><font size=-1>1082     </font></a>            <isset property="deploy.ant.enabled"/>
+<a name="1083"><font size=-1>1083     </font></a>        </condition>
+<a name="1084"><font size=-1>1084     </font></a>    </target>
+<a name="1085"><font size=-1>1085     </font></a>    <target if="do.display.browser.nb.old" name="-display-browser-nb-old">
+<a name="1086"><font size=-1>1086     </font></a>        <nbbrowse url="${client.url}"/>
+<a name="1087"><font size=-1>1087     </font></a>    </target>
+<a name="1088"><font size=-1>1088     </font></a>    <target if="do.display.browser.nb" name="-display-browser-nb">
+<a name="1089"><font size=-1>1089     </font></a>        <nbbrowse context="${browser.context}" url="${client.url}" urlPath="${client.urlPart}"/>
+<a name="1090"><font size=-1>1090     </font></a>    </target>
+<a name="1091"><font size=-1>1091     </font></a>    <target if="do.display.browser.cl" name="-get-browser" unless="browser">
+<a name="1092"><font size=-1>1092     </font></a>        <condition property="browser" value="rundll32">
+<a name="1093"><font size=-1>1093     </font></a>            <os family="windows"/>
+<a name="1094"><font size=-1>1094     </font></a>        </condition>
+<a name="1095"><font size=-1>1095     </font></a>        <condition else="" property="browser.args" value="url.dll,FileProtocolHandler">
+<a name="1096"><font size=-1>1096     </font></a>            <os family="windows"/>
+<a name="1097"><font size=-1>1097     </font></a>        </condition>
+<a name="1098"><font size=-1>1098     </font></a>        <condition property="browser" value="/usr/bin/open">
+<a name="1099"><font size=-1>1099     </font></a>            <os family="mac"/>
+<a name="1100"><font size=-1>1100     </font></a>        </condition>
+<a name="1101"><font size=-1>1101     </font></a>        <property environment="env"/>
+<a name="1102"><font size=-1>1102     </font></a>        <condition property="browser" value="${env.BROWSER}">
+<a name="1103"><font size=-1>1103     </font></a>            <isset property="env.BROWSER"/>
+<a name="1104"><font size=-1>1104     </font></a>        </condition>
+<a name="1105"><font size=-1>1105     </font></a>        <condition property="browser" value="/usr/bin/firefox">
+<a name="1106"><font size=-1>1106     </font></a>            <available file="/usr/bin/firefox"/>
+<a name="1107"><font size=-1>1107     </font></a>        </condition>
+<a name="1108"><font size=-1>1108     </font></a>        <condition property="browser" value="/usr/local/firefox/firefox">
+<a name="1109"><font size=-1>1109     </font></a>            <available file="/usr/local/firefox/firefox"/>
+<a name="1110"><font size=-1>1110     </font></a>        </condition>
+<a name="1111"><font size=-1>1111     </font></a>        <condition property="browser" value="/usr/bin/mozilla">
+<a name="1112"><font size=-1>1112     </font></a>            <available file="/usr/bin/mozilla"/>
+<a name="1113"><font size=-1>1113     </font></a>        </condition>
+<a name="1114"><font size=-1>1114     </font></a>        <condition property="browser" value="/usr/local/mozilla/mozilla">
+<a name="1115"><font size=-1>1115     </font></a>            <available file="/usr/local/mozilla/mozilla"/>
+<a name="1116"><font size=-1>1116     </font></a>        </condition>
+<a name="1117"><font size=-1>1117     </font></a>        <condition property="browser" value="/usr/sfw/lib/firefox/firefox">
+<a name="1118"><font size=-1>1118     </font></a>            <available file="/usr/sfw/lib/firefox/firefox"/>
+<a name="1119"><font size=-1>1119     </font></a>        </condition>
+<a name="1120"><font size=-1>1120     </font></a>        <condition property="browser" value="/opt/csw/bin/firefox">
+<a name="1121"><font size=-1>1121     </font></a>            <available file="/opt/csw/bin/firefox"/>
+<a name="1122"><font size=-1>1122     </font></a>        </condition>
+<a name="1123"><font size=-1>1123     </font></a>        <condition property="browser" value="/usr/sfw/lib/mozilla/mozilla">
+<a name="1124"><font size=-1>1124     </font></a>            <available file="/usr/sfw/lib/mozilla/mozilla"/>
+<a name="1125"><font size=-1>1125     </font></a>        </condition>
+<a name="1126"><font size=-1>1126     </font></a>        <condition property="browser" value="/opt/csw/bin/mozilla">
+<a name="1127"><font size=-1>1127     </font></a>            <available file="/opt/csw/bin/mozilla"/>
+<a name="1128"><font size=-1>1128     </font></a>        </condition>
+<a name="1129"><font size=-1>1129     </font></a>    </target>
+<a name="1130"><font size=-1>1130     </font></a>    <target depends="-get-browser" if="do.display.browser.cl" name="-display-browser-cl">
+<a name="1131"><font size=-1>1131     </font></a>        <fail unless="browser">
+<a name="1132"><font size=-1>1132     </font></a>                    Browser not found, cannot launch the deployed application. Try to set the BROWSER environment variable.
+<a name="1133"><font size=-1>1133     </font></a>                </fail>
+<a name="1134"><font size=-1>1134     </font></a>        <property name="browse.url" value="${deploy.ant.client.url}${client.urlPart}"/>
+<a name="1135"><font size=-1>1135     </font></a>        <echo>Launching ${browse.url}</echo>
+<a name="1136"><font size=-1>1136     </font></a>        <exec executable="${browser}" spawn="true">
+<a name="1137"><font size=-1>1137     </font></a>            <arg line="${browser.args} ${browse.url}"/>
+<a name="1138"><font size=-1>1138     </font></a>        </exec>
+<a name="1139"><font size=-1>1139     </font></a>    </target>
+<a name="1140"><font size=-1>1140     </font></a>    <target depends="init,-init-cos,compile-single" name="run-main">
+<a name="1141"><font size=-1>1141     </font></a>        <fail unless="run.class">Must select one file in the IDE or set run.class</fail>
+<a name="1142"><font size=-1>1142     </font></a>        <webproject1:java classname="${run.class}"/>
+<a name="1143"><font size=-1>1143     </font></a>    </target>
+<a name="1144"><font size=-1>1144     </font></a>    <target depends="init,compile-test-single,-pre-test-run-single" name="run-test-with-main">
+<a name="1145"><font size=-1>1145     </font></a>        <fail unless="run.class">Must select one file in the IDE or set run.class</fail>
+<a name="1146"><font size=-1>1146     </font></a>        <webproject1:java classname="${run.class}" classpath="${run.test.classpath}"/>
+<a name="1147"><font size=-1>1147     </font></a>    </target>
+<a name="1148"><font size=-1>1148     </font></a>    <target depends="init" if="netbeans.home" name="-do-update-breakpoints">
+<a name="1149"><font size=-1>1149     </font></a>        <webproject1:nbjpdaappreloaded/>
+<a name="1150"><font size=-1>1150     </font></a>    </target>
+<a name="1151"><font size=-1>1151     </font></a>    <!--
+<a name="1152"><font size=-1>1152     </font></a>                DEBUGGING SECTION
+<a name="1153"><font size=-1>1153     </font></a>            -->
+<a name="1154"><font size=-1>1154     </font></a>    <target depends="init,-init-cos,compile,compile-jsps,-do-compile-single-jsp,-pre-dist,-do-tmp-dist-with-manifest,-do-tmp-dist-without-manifest" description="Debug project in IDE." if="netbeans.home" name="debug">
+<a name="1155"><font size=-1>1155     </font></a>        <nbstartserver debugmode="true"/>
+<a name="1156"><font size=-1>1156     </font></a>        <antcall target="connect-debugger"/>
+<a name="1157"><font size=-1>1157     </font></a>        <nbdeploy clientUrlPart="${client.urlPart}" debugmode="true" forceRedeploy="true"/>
+<a name="1158"><font size=-1>1158     </font></a>        <antcall target="debug-display-browser-old"/>
+<a name="1159"><font size=-1>1159     </font></a>        <antcall target="debug-display-browser"/>
+<a name="1160"><font size=-1>1160     </font></a>        <antcall target="connect-client-debugger"/>
+<a name="1161"><font size=-1>1161     </font></a>    </target>
+<a name="1162"><font size=-1>1162     </font></a>    <target if="do.debug.server" name="connect-debugger" unless="is.debugged">
+<a name="1163"><font size=-1>1163     </font></a>        <condition property="listeningcp" value="sourcepath">
+<a name="1164"><font size=-1>1164     </font></a>            <istrue value="${j2ee.compile.on.save}"/>
+<a name="1165"><font size=-1>1165     </font></a>        </condition>
+<a name="1166"><font size=-1>1166     </font></a>        <nbjpdaconnect address="${jpda.address}" host="${jpda.host}" listeningcp="${listeningcp}" name="${name}" transport="${jpda.transport}">
+<a name="1167"><font size=-1>1167     </font></a>            <classpath>
+<a name="1168"><font size=-1>1168     </font></a>                <path path="${debug.classpath}:${j2ee.platform.classpath}"/>
+<a name="1169"><font size=-1>1169     </font></a>            </classpath>
+<a name="1170"><font size=-1>1170     </font></a>            <sourcepath>
+<a name="1171"><font size=-1>1171     </font></a>                <path path="${web.docbase.dir}"/>
+<a name="1172"><font size=-1>1172     </font></a>            </sourcepath>
+<a name="1173"><font size=-1>1173     </font></a>        </nbjpdaconnect>
+<a name="1174"><font size=-1>1174     </font></a>    </target>
+<a name="1175"><font size=-1>1175     </font></a>    <target if="do.display.browser.debug.old" name="debug-display-browser-old">
+<a name="1176"><font size=-1>1176     </font></a>        <nbbrowse url="${client.url}"/>
+<a name="1177"><font size=-1>1177     </font></a>    </target>
+<a name="1178"><font size=-1>1178     </font></a>    <target if="do.display.browser.debug" name="debug-display-browser">
+<a name="1179"><font size=-1>1179     </font></a>        <nbbrowse context="${browser.context}" url="${client.url}" urlPath="${client.urlPart}"/>
+<a name="1180"><font size=-1>1180     </font></a>    </target>
+<a name="1181"><font size=-1>1181     </font></a>    <target if="do.debug.client" name="connect-client-debugger">
+<a name="1182"><font size=-1>1182     </font></a>        <webproject1:nbjsdebugstart webUrl="${client.url}"/>
+<a name="1183"><font size=-1>1183     </font></a>    </target>
+<a name="1184"><font size=-1>1184     </font></a>    <target depends="init,compile-test-single" if="netbeans.home" name="-debug-start-debuggee-main-test">
+<a name="1185"><font size=-1>1185     </font></a>        <fail unless="debug.class">Must select one file in the IDE or set debug.class</fail>
+<a name="1186"><font size=-1>1186     </font></a>        <webproject1:debug classname="${debug.class}" classpath="${debug.test.classpath}"/>
+<a name="1187"><font size=-1>1187     </font></a>    </target>
+<a name="1188"><font size=-1>1188     </font></a>    <target depends="init,compile-test-single,-debug-start-debugger-main-test,-debug-start-debuggee-main-test" if="netbeans.home" name="debug-test-with-main"/>
+<a name="1189"><font size=-1>1189     </font></a>    <target depends="init,compile,compile-jsps,-do-compile-single-jsp,debug" if="netbeans.home" name="debug-single"/>
+<a name="1190"><font size=-1>1190     </font></a>    <target depends="init" if="netbeans.home" name="-debug-start-debugger-main-test">
+<a name="1191"><font size=-1>1191     </font></a>        <webproject1:nbjpdastart classpath="${debug.test.classpath}" name="${debug.class}"/>
+<a name="1192"><font size=-1>1192     </font></a>    </target>
+<a name="1193"><font size=-1>1193     </font></a>    <target depends="init" if="netbeans.home" name="-debug-start-debugger">
+<a name="1194"><font size=-1>1194     </font></a>        <webproject1:nbjpdastart name="${debug.class}"/>
+<a name="1195"><font size=-1>1195     </font></a>    </target>
+<a name="1196"><font size=-1>1196     </font></a>    <target depends="init,compile-single" if="netbeans.home" name="-debug-start-debuggee-single">
+<a name="1197"><font size=-1>1197     </font></a>        <fail unless="debug.class">Must select one file in the IDE or set debug.class</fail>
+<a name="1198"><font size=-1>1198     </font></a>        <webproject1:debug classname="${debug.class}"/>
+<a name="1199"><font size=-1>1199     </font></a>    </target>
+<a name="1200"><font size=-1>1200     </font></a>    <target depends="init,compile-single,-debug-start-debugger,-debug-start-debuggee-single" if="netbeans.home" name="debug-single-main"/>
+<a name="1201"><font size=-1>1201     </font></a>    <target depends="init" name="-pre-debug-fix">
+<a name="1202"><font size=-1>1202     </font></a>        <fail unless="fix.includes">Must set fix.includes</fail>
+<a name="1203"><font size=-1>1203     </font></a>        <property name="javac.includes" value="${fix.includes}.java"/>
+<a name="1204"><font size=-1>1204     </font></a>    </target>
+<a name="1205"><font size=-1>1205     </font></a>    <target depends="init,-pre-debug-fix,compile-single" if="netbeans.home" name="-do-debug-fix">
+<a name="1206"><font size=-1>1206     </font></a>        <webproject1:nbjpdareload/>
+<a name="1207"><font size=-1>1207     </font></a>    </target>
+<a name="1208"><font size=-1>1208     </font></a>    <target depends="init,-pre-debug-fix,-do-debug-fix" if="netbeans.home" name="debug-fix"/>
+<a name="1209"><font size=-1>1209     </font></a>    <!--
+<a name="1210"><font size=-1>1210     </font></a>            =================
+<a name="1211"><font size=-1>1211     </font></a>            PROFILING SECTION
+<a name="1212"><font size=-1>1212     </font></a>            =================
+<a name="1213"><font size=-1>1213     </font></a>            -->
+<a name="1214"><font size=-1>1214     </font></a>    <!--
+<a name="1215"><font size=-1>1215     </font></a>                pre NB7.2 profiling section; consider it deprecated
+<a name="1216"><font size=-1>1216     </font></a>            -->
+<a name="1217"><font size=-1>1217     </font></a>    <target description="Profile a J2EE project in the IDE." if="profiler.info.jvmargs.agent" name="-profile-pre72">
+<a name="1218"><font size=-1>1218     </font></a>        <condition else="start-profiled-server" property="profiler.startserver.target" value="start-profiled-server-extraargs">
+<a name="1219"><font size=-1>1219     </font></a>            <isset property="profiler.info.jvmargs.extra"/>
+<a name="1220"><font size=-1>1220     </font></a>        </condition>
+<a name="1221"><font size=-1>1221     </font></a>        <antcall target="${profiler.startserver.target}"/>
+<a name="1222"><font size=-1>1222     </font></a>        <antcall target="run"/>
+<a name="1223"><font size=-1>1223     </font></a>        <antcall target="-profile-start-loadgen"/>
+<a name="1224"><font size=-1>1224     </font></a>    </target>
+<a name="1225"><font size=-1>1225     </font></a>    <target if="profiler.info.jvmargs.agent" name="start-profiled-server">
+<a name="1226"><font size=-1>1226     </font></a>        <nbstartprofiledserver forceRestart="${profiler.j2ee.serverForceRestart}" javaPlatform="${profiler.info.javaPlatform}" startupTimeout="${profiler.j2ee.serverStartupTimeout}">
+<a name="1227"><font size=-1>1227     </font></a>            <jvmarg value="${profiler.info.jvmargs.agent}"/>
+<a name="1228"><font size=-1>1228     </font></a>            <jvmarg value="${profiler.j2ee.agentID}"/>
+<a name="1229"><font size=-1>1229     </font></a>        </nbstartprofiledserver>
+<a name="1230"><font size=-1>1230     </font></a>    </target>
+<a name="1231"><font size=-1>1231     </font></a>    <target if="profiler.info.jvmargs.agent" name="start-profiled-server-extraargs">
+<a name="1232"><font size=-1>1232     </font></a>        <nbstartprofiledserver forceRestart="${profiler.j2ee.serverForceRestart}" javaPlatform="${profiler.info.javaPlatform}" startupTimeout="${profiler.j2ee.serverStartupTimeout}">
+<a name="1233"><font size=-1>1233     </font></a>            <jvmarg value="${profiler.info.jvmargs.extra}"/>
+<a name="1234"><font size=-1>1234     </font></a>            <jvmarg value="${profiler.info.jvmargs.agent}"/>
+<a name="1235"><font size=-1>1235     </font></a>            <jvmarg value="${profiler.j2ee.agentID}"/>
+<a name="1236"><font size=-1>1236     </font></a>        </nbstartprofiledserver>
+<a name="1237"><font size=-1>1237     </font></a>    </target>
+<a name="1238"><font size=-1>1238     </font></a>    <target depends="profile-init,compile-test-single" if="profiler.info.jvmargs.agent" name="-profile-test-single-pre72">
+<a name="1239"><font size=-1>1239     </font></a>        <fail unless="netbeans.home">This target only works when run from inside the NetBeans IDE.</fail>
+<a name="1240"><font size=-1>1240     </font></a>        <nbprofiledirect>
+<a name="1241"><font size=-1>1241     </font></a>            <classpath>
+<a name="1242"><font size=-1>1242     </font></a>                <path path="${run.test.classpath}"/>
+<a name="1243"><font size=-1>1243     </font></a>                <path path="${j2ee.platform.classpath}"/>
+<a name="1244"><font size=-1>1244     </font></a>            </classpath>
+<a name="1245"><font size=-1>1245     </font></a>        </nbprofiledirect>
+<a name="1246"><font size=-1>1246     </font></a>        <junit dir="${profiler.info.dir}" errorproperty="tests.failed" failureproperty="tests.failed" fork="true" jvm="${profiler.info.jvm}" showoutput="true">
+<a name="1247"><font size=-1>1247     </font></a>            <env key="${profiler.info.pathvar}" path="${profiler.info.agentpath}:${profiler.current.path}"/>
+<a name="1248"><font size=-1>1248     </font></a>            <jvmarg value="${profiler.info.jvmargs.agent}"/>
+<a name="1249"><font size=-1>1249     </font></a>            <jvmarg line="${profiler.info.jvmargs}"/>
+<a name="1250"><font size=-1>1250     </font></a>            <test name="${profile.class}"/>
+<a name="1251"><font size=-1>1251     </font></a>            <classpath>
+<a name="1252"><font size=-1>1252     </font></a>                <path path="${run.test.classpath}"/>
+<a name="1253"><font size=-1>1253     </font></a>                <path path="${j2ee.platform.classpath}"/>
+<a name="1254"><font size=-1>1254     </font></a>            </classpath>
+<a name="1255"><font size=-1>1255     </font></a>            <syspropertyset>
+<a name="1256"><font size=-1>1256     </font></a>                <propertyref prefix="test-sys-prop."/>
+<a name="1257"><font size=-1>1257     </font></a>                <mapper from="test-sys-prop.*" to="*" type="glob"/>
+<a name="1258"><font size=-1>1258     </font></a>            </syspropertyset>
+<a name="1259"><font size=-1>1259     </font></a>            <formatter type="brief" usefile="false"/>
+<a name="1260"><font size=-1>1260     </font></a>            <formatter type="xml"/>
+<a name="1261"><font size=-1>1261     </font></a>        </junit>
+<a name="1262"><font size=-1>1262     </font></a>    </target>
+<a name="1263"><font size=-1>1263     </font></a>    <target if="netbeans.home" name="-profile-check">
+<a name="1264"><font size=-1>1264     </font></a>        <condition property="profiler.configured">
+<a name="1265"><font size=-1>1265     </font></a>            <or>
+<a name="1266"><font size=-1>1266     </font></a>                <contains casesensitive="true" string="${run.jvmargs.ide}" substring="-agentpath:"/>
+<a name="1267"><font size=-1>1267     </font></a>                <contains casesensitive="true" string="${run.jvmargs.ide}" substring="-javaagent:"/>
+<a name="1268"><font size=-1>1268     </font></a>            </or>
+<a name="1269"><font size=-1>1269     </font></a>        </condition>
+<a name="1270"><font size=-1>1270     </font></a>    </target>
+<a name="1271"><font size=-1>1271     </font></a>    <target depends="init,-init-cos,compile,compile-jsps,-do-compile-single-jsp,-pre-dist,-do-tmp-dist-with-manifest,-do-tmp-dist-without-manifest" name="-do-profile">
+<a name="1272"><font size=-1>1272     </font></a>        <startprofiler/>
+<a name="1273"><font size=-1>1273     </font></a>        <nbstartserver profilemode="true"/>
+<a name="1274"><font size=-1>1274     </font></a>        <nbdeploy clientUrlPart="${client.urlPart}" forceRedeploy="true" profilemode="true"/>
+<a name="1275"><font size=-1>1275     </font></a>        <antcall target="debug-display-browser-old"/>
+<a name="1276"><font size=-1>1276     </font></a>        <antcall target="debug-display-browser"/>
+<a name="1277"><font size=-1>1277     </font></a>        <antcall target="-profile-start-loadgen"/>
+<a name="1278"><font size=-1>1278     </font></a>    </target>
+<a name="1279"><font size=-1>1279     </font></a>    <target depends="-profile-check,-profile-pre72" description="Profile a J2EE project in the IDE." if="profiler.configured" name="profile" unless="profiler.info.jvmargs.agent">
+<a name="1280"><font size=-1>1280     </font></a>        <antcall target="-do-profile"/>
+<a name="1281"><font size=-1>1281     </font></a>    </target>
+<a name="1282"><font size=-1>1282     </font></a>    <target depends="-profile-test-single-pre72" name="profile-test-single"/>
+<a name="1283"><font size=-1>1283     </font></a>    <target depends="-profile-check" if="profiler.configured" name="profile-test" unless="profiler.info.jvmargs.agent">
+<a name="1284"><font size=-1>1284     </font></a>        <startprofiler/>
+<a name="1285"><font size=-1>1285     </font></a>        <antcall target="test-single"/>
+<a name="1286"><font size=-1>1286     </font></a>    </target>
+<a name="1287"><font size=-1>1287     </font></a>    <target if="profiler.loadgen.path" name="-profile-start-loadgen">
+<a name="1288"><font size=-1>1288     </font></a>        <loadgenstart path="${profiler.loadgen.path}"/>
+<a name="1289"><font size=-1>1289     </font></a>    </target>
+<a name="1290"><font size=-1>1290     </font></a>    <!--
+<a name="1291"><font size=-1>1291     </font></a>                JAVADOC SECTION
+<a name="1292"><font size=-1>1292     </font></a>            -->
+<a name="1293"><font size=-1>1293     </font></a>    <target depends="init" if="have.sources" name="javadoc-build">
+<a name="1294"><font size=-1>1294     </font></a>        <mkdir dir="${dist.javadoc.dir}"/>
+<a name="1295"><font size=-1>1295     </font></a>        <javadoc additionalparam="${javadoc.additionalparam}" author="${javadoc.author}" charset="UTF-8" destdir="${dist.javadoc.dir}" docencoding="UTF-8" encoding="${javadoc.encoding.used}" failonerror="true" noindex="${javadoc.noindex}" nonavbar="${javadoc.nonavbar}" notree="${javadoc.notree}" private="${javadoc.private}" source="${javac.source}" splitindex="${javadoc.splitindex}" use="${javadoc.use}" useexternalfile="true" version="${javadoc.version}" windowtitle="${javadoc.windowtitle}">
+<a name="1296"><font size=-1>1296     </font></a>            <classpath>
+<a name="1297"><font size=-1>1297     </font></a>                <path path="${javac.classpath}:${j2ee.platform.classpath}"/>
+<a name="1298"><font size=-1>1298     </font></a>            </classpath>
+<a name="1299"><font size=-1>1299     </font></a>            <fileset dir="${src.dir}" excludes="${excludes}" includes="${includes}">
+<a name="1300"><font size=-1>1300     </font></a>                <filename name="**/*.java"/>
+<a name="1301"><font size=-1>1301     </font></a>            </fileset>
+<a name="1302"><font size=-1>1302     </font></a>            <fileset dir="${build.generated.sources.dir}" erroronmissingdir="false">
+<a name="1303"><font size=-1>1303     </font></a>                <include name="**/*.java"/>
+<a name="1304"><font size=-1>1304     </font></a>            </fileset>
+<a name="1305"><font size=-1>1305     </font></a>        </javadoc>
+<a name="1306"><font size=-1>1306     </font></a>        <copy todir="${dist.javadoc.dir}">
+<a name="1307"><font size=-1>1307     </font></a>            <fileset dir="${src.dir}" excludes="${excludes}" includes="${includes}">
+<a name="1308"><font size=-1>1308     </font></a>                <filename name="**/doc-files/**"/>
+<a name="1309"><font size=-1>1309     </font></a>            </fileset>
+<a name="1310"><font size=-1>1310     </font></a>            <fileset dir="${build.generated.sources.dir}" erroronmissingdir="false">
+<a name="1311"><font size=-1>1311     </font></a>                <include name="**/doc-files/**"/>
+<a name="1312"><font size=-1>1312     </font></a>            </fileset>
+<a name="1313"><font size=-1>1313     </font></a>        </copy>
+<a name="1314"><font size=-1>1314     </font></a>    </target>
+<a name="1315"><font size=-1>1315     </font></a>    <target depends="init,javadoc-build" if="netbeans.home" name="javadoc-browse" unless="no.javadoc.preview">
+<a name="1316"><font size=-1>1316     </font></a>        <nbbrowse file="${dist.javadoc.dir}/index.html"/>
+<a name="1317"><font size=-1>1317     </font></a>    </target>
+<a name="1318"><font size=-1>1318     </font></a>    <target depends="init,javadoc-build,javadoc-browse" description="Build Javadoc." name="javadoc"/>
+<a name="1319"><font size=-1>1319     </font></a>    <!--
+<a name="1320"><font size=-1>1320     </font></a>                
+<a name="1321"><font size=-1>1321     </font></a>                TEST COMPILATION SECTION
+<a name="1322"><font size=-1>1322     </font></a>            -->
+<a name="1323"><font size=-1>1323     </font></a>    <target depends="init,compile" if="have.tests" name="-pre-pre-compile-test">
+<a name="1324"><font size=-1>1324     </font></a>        <mkdir dir="${build.test.classes.dir}"/>
+<a name="1325"><font size=-1>1325     </font></a>        <property name="j2ee.platform.embeddableejb.classpath" value=""/>
+<a name="1326"><font size=-1>1326     </font></a>    </target>
+<a name="1327"><font size=-1>1327     </font></a>    <target name="-pre-compile-test">
+<a name="1328"><font size=-1>1328     </font></a>        <!-- Empty placeholder for easier customization. -->
+<a name="1329"><font size=-1>1329     </font></a>        <!-- You can override this target in the ../build.xml file. -->
+<a name="1330"><font size=-1>1330     </font></a>    </target>
+<a name="1331"><font size=-1>1331     </font></a>    <target depends="init,compile,-pre-pre-compile-test,-pre-compile-test" if="have.tests" name="-do-compile-test">
+<a name="1332"><font size=-1>1332     </font></a>        <webproject2:javac classpath="${javac.test.classpath}:${j2ee.platform.classpath}:${j2ee.platform.embeddableejb.classpath}" debug="true" destdir="${build.test.classes.dir}" srcdir="${test.src.dir}"/>
+<a name="1333"><font size=-1>1333     </font></a>        <copy todir="${build.test.classes.dir}">
+<a name="1334"><font size=-1>1334     </font></a>            <fileset dir="${test.src.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
+<a name="1335"><font size=-1>1335     </font></a>        </copy>
+<a name="1336"><font size=-1>1336     </font></a>    </target>
+<a name="1337"><font size=-1>1337     </font></a>    <target name="-post-compile-test">
+<a name="1338"><font size=-1>1338     </font></a>        <!-- Empty placeholder for easier customization. -->
+<a name="1339"><font size=-1>1339     </font></a>        <!-- You can override this target in the ../build.xml file. -->
+<a name="1340"><font size=-1>1340     </font></a>    </target>
+<a name="1341"><font size=-1>1341     </font></a>    <target depends="init,compile,-pre-pre-compile-test,-pre-compile-test,-do-compile-test,-post-compile-test" name="compile-test"/>
+<a name="1342"><font size=-1>1342     </font></a>    <target name="-pre-compile-test-single">
+<a name="1343"><font size=-1>1343     </font></a>        <!-- Empty placeholder for easier customization. -->
+<a name="1344"><font size=-1>1344     </font></a>        <!-- You can override this target in the ../build.xml file. -->
+<a name="1345"><font size=-1>1345     </font></a>    </target>
+<a name="1346"><font size=-1>1346     </font></a>    <target depends="init,compile,-pre-pre-compile-test,-pre-compile-test-single" if="have.tests" name="-do-compile-test-single">
+<a name="1347"><font size=-1>1347     </font></a>        <fail unless="javac.includes">Must select some files in the IDE or set javac.includes</fail>
+<a name="1348"><font size=-1>1348     </font></a>        <webproject2:javac classpath="${javac.test.classpath}:${j2ee.platform.classpath}:${j2ee.platform.embeddableejb.classpath}" debug="true" destdir="${build.test.classes.dir}" excludes="" includes="${javac.includes}" srcdir="${test.src.dir}"/>
+<a name="1349"><font size=-1>1349     </font></a>        <copy todir="${build.test.classes.dir}">
+<a name="1350"><font size=-1>1350     </font></a>            <fileset dir="${test.src.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
+<a name="1351"><font size=-1>1351     </font></a>        </copy>
+<a name="1352"><font size=-1>1352     </font></a>    </target>
+<a name="1353"><font size=-1>1353     </font></a>    <target name="-post-compile-test-single">
+<a name="1354"><font size=-1>1354     </font></a>        <!-- Empty placeholder for easier customization. -->
+<a name="1355"><font size=-1>1355     </font></a>        <!-- You can override this target in the ../build.xml file. -->
+<a name="1356"><font size=-1>1356     </font></a>    </target>
+<a name="1357"><font size=-1>1357     </font></a>    <target depends="init,compile,-pre-pre-compile-test,-pre-compile-test-single,-do-compile-test-single,-post-compile-test-single" name="compile-test-single"/>
+<a name="1358"><font size=-1>1358     </font></a>    <!--
+<a name="1359"><font size=-1>1359     </font></a>                
+<a name="1360"><font size=-1>1360     </font></a>                TEST EXECUTION SECTION
+<a name="1361"><font size=-1>1361     </font></a>            -->
+<a name="1362"><font size=-1>1362     </font></a>    <target depends="init" if="have.tests" name="-pre-test-run">
+<a name="1363"><font size=-1>1363     </font></a>        <mkdir dir="${build.test.results.dir}"/>
+<a name="1364"><font size=-1>1364     </font></a>    </target>
+<a name="1365"><font size=-1>1365     </font></a>    <target depends="init,compile-test,-pre-test-run" if="have.tests" name="-do-test-run">
+<a name="1366"><font size=-1>1366     </font></a>        <webproject2:test includes="${includes}" testincludes="**/*Test.java"/>
+<a name="1367"><font size=-1>1367     </font></a>    </target>
+<a name="1368"><font size=-1>1368     </font></a>    <target depends="init,compile-test,-pre-test-run,-do-test-run" if="have.tests" name="-post-test-run">
+<a name="1369"><font size=-1>1369     </font></a>        <fail if="tests.failed" unless="ignore.failing.tests">Some tests failed; see details above.</fail>
+<a name="1370"><font size=-1>1370     </font></a>    </target>
+<a name="1371"><font size=-1>1371     </font></a>    <target depends="init" if="have.tests" name="test-report"/>
+<a name="1372"><font size=-1>1372     </font></a>    <target depends="init" if="netbeans.home+have.tests" name="-test-browse"/>
+<a name="1373"><font size=-1>1373     </font></a>    <target depends="init,compile-test,-pre-test-run,-do-test-run,test-report,-post-test-run,-test-browse" description="Run unit tests." name="test"/>
+<a name="1374"><font size=-1>1374     </font></a>    <target depends="init" if="have.tests" name="-pre-test-run-single">
+<a name="1375"><font size=-1>1375     </font></a>        <mkdir dir="${build.test.results.dir}"/>
+<a name="1376"><font size=-1>1376     </font></a>    </target>
+<a name="1377"><font size=-1>1377     </font></a>    <target depends="init,compile-test-single,-pre-test-run-single" if="have.tests" name="-do-test-run-single">
+<a name="1378"><font size=-1>1378     </font></a>        <fail unless="test.includes">Must select some files in the IDE or set test.includes</fail>
+<a name="1379"><font size=-1>1379     </font></a>        <webproject2:test excludes="" includes="${test.includes}" testincludes="${test.includes}"/>
+<a name="1380"><font size=-1>1380     </font></a>    </target>
+<a name="1381"><font size=-1>1381     </font></a>    <target depends="init,compile-test-single,-pre-test-run-single,-do-test-run-single" if="have.tests" name="-post-test-run-single">
+<a name="1382"><font size=-1>1382     </font></a>        <fail if="tests.failed" unless="ignore.failing.tests">Some tests failed; see details above.</fail>
+<a name="1383"><font size=-1>1383     </font></a>    </target>
+<a name="1384"><font size=-1>1384     </font></a>    <target depends="init,compile-test-single,-pre-test-run-single,-do-test-run-single,-post-test-run-single" description="Run single unit test." name="test-single"/>
+<a name="1385"><font size=-1>1385     </font></a>    <target depends="init,compile-test-single,-pre-test-run-single" if="have.tests" name="-do-test-run-single-method">
+<a name="1386"><font size=-1>1386     </font></a>        <fail unless="test.class">Must select some files in the IDE or set test.class</fail>
+<a name="1387"><font size=-1>1387     </font></a>        <fail unless="test.method">Must select some method in the IDE or set test.method</fail>
+<a name="1388"><font size=-1>1388     </font></a>        <webproject2:test excludes="" includes="${javac.includes}" testincludes="${test.class}" testmethods="${test.method}"/>
+<a name="1389"><font size=-1>1389     </font></a>    </target>
+<a name="1390"><font size=-1>1390     </font></a>    <target depends="init,compile-test-single,-pre-test-run-single,-do-test-run-single-method" if="have.tests" name="-post-test-run-single-method">
+<a name="1391"><font size=-1>1391     </font></a>        <fail if="tests.failed" unless="ignore.failing.tests">Some tests failed; see details above.</fail>
+<a name="1392"><font size=-1>1392     </font></a>    </target>
+<a name="1393"><font size=-1>1393     </font></a>    <target depends="init,compile-test-single,-pre-test-run-single,-do-test-run-single-method,-post-test-run-single-method" description="Run single unit test." name="test-single-method"/>
+<a name="1394"><font size=-1>1394     </font></a>    <!--
+<a name="1395"><font size=-1>1395     </font></a>                
+<a name="1396"><font size=-1>1396     </font></a>                TEST DEBUGGING SECTION
+<a name="1397"><font size=-1>1397     </font></a>            -->
+<a name="1398"><font size=-1>1398     </font></a>    <target depends="init,compile-test-single,-pre-test-run-single" if="have.tests" name="-debug-start-debuggee-test">
+<a name="1399"><font size=-1>1399     </font></a>        <fail unless="test.class">Must select one file in the IDE or set test.class</fail>
+<a name="1400"><font size=-1>1400     </font></a>        <webproject2:test-debug excludes="" includes="${javac.includes}" testClass="${test.class}" testincludes="${javac.includes}"/>
+<a name="1401"><font size=-1>1401     </font></a>    </target>
+<a name="1402"><font size=-1>1402     </font></a>    <target depends="init,compile-test-single,-pre-test-run-single" if="have.tests" name="-debug-start-debuggee-test-method">
+<a name="1403"><font size=-1>1403     </font></a>        <fail unless="test.class">Must select one file in the IDE or set test.class</fail>
+<a name="1404"><font size=-1>1404     </font></a>        <fail unless="test.method">Must select some method in the IDE or set test.method</fail>
+<a name="1405"><font size=-1>1405     </font></a>        <webproject2:test-debug excludes="" includes="${javac.includes}" testClass="${test.class}" testMethod="${test.method}" testincludes="${test.class}" testmethods="${test.method}"/>
+<a name="1406"><font size=-1>1406     </font></a>    </target>
+<a name="1407"><font size=-1>1407     </font></a>    <target depends="init,compile-test" if="netbeans.home+have.tests" name="-debug-start-debugger-test">
+<a name="1408"><font size=-1>1408     </font></a>        <webproject1:nbjpdastart classpath="${debug.test.classpath}" name="${test.class}"/>
+<a name="1409"><font size=-1>1409     </font></a>    </target>
+<a name="1410"><font size=-1>1410     </font></a>    <target depends="init,compile-test,-debug-start-debugger-test,-debug-start-debuggee-test" name="debug-test"/>
+<a name="1411"><font size=-1>1411     </font></a>    <target depends="init,compile-test-single,-debug-start-debugger-test,-debug-start-debuggee-test-method" name="debug-test-method"/>
+<a name="1412"><font size=-1>1412     </font></a>    <target depends="init,-pre-debug-fix,compile-test-single" if="netbeans.home" name="-do-debug-fix-test">
+<a name="1413"><font size=-1>1413     </font></a>        <webproject1:nbjpdareload dir="${build.test.classes.dir}"/>
+<a name="1414"><font size=-1>1414     </font></a>    </target>
+<a name="1415"><font size=-1>1415     </font></a>    <target depends="init,-pre-debug-fix,-do-debug-fix-test" if="netbeans.home" name="debug-fix-test"/>
+<a name="1416"><font size=-1>1416     </font></a>    <!--
+<a name="1417"><font size=-1>1417     </font></a>                
+<a name="1418"><font size=-1>1418     </font></a>                CLEANUP SECTION
+<a name="1419"><font size=-1>1419     </font></a>            -->
+<a name="1420"><font size=-1>1420     </font></a>    <target depends="init" name="deps-clean" unless="no.deps"/>
+<a name="1421"><font size=-1>1421     </font></a>    <target depends="init" name="do-clean">
+<a name="1422"><font size=-1>1422     </font></a>        <condition property="build.dir.to.clean" value="${build.web.dir}">
+<a name="1423"><font size=-1>1423     </font></a>            <isset property="dist.ear.dir"/>
+<a name="1424"><font size=-1>1424     </font></a>        </condition>
+<a name="1425"><font size=-1>1425     </font></a>        <property name="build.dir.to.clean" value="${build.web.dir}"/>
+<a name="1426"><font size=-1>1426     </font></a>        <delete includeEmptyDirs="true" quiet="true">
+<a name="1427"><font size=-1>1427     </font></a>            <fileset dir="${build.dir.to.clean}/WEB-INF/lib"/>
+<a name="1428"><font size=-1>1428     </font></a>        </delete>
+<a name="1429"><font size=-1>1429     </font></a>        <delete dir="${build.dir}"/>
+<a name="1430"><font size=-1>1430     </font></a>        <available file="${build.dir.to.clean}/WEB-INF/lib" property="status.clean-failed" type="dir"/>
+<a name="1431"><font size=-1>1431     </font></a>        <delete dir="${dist.dir}"/>
+<a name="1432"><font size=-1>1432     </font></a>    </target>
+<a name="1433"><font size=-1>1433     </font></a>    <target depends="do-clean" if="status.clean-failed" name="check-clean">
+<a name="1434"><font size=-1>1434     </font></a>        <echo message="Warning: unable to delete some files in ${build.web.dir}/WEB-INF/lib - they are probably locked by the J2EE server. "/>
+<a name="1435"><font size=-1>1435     </font></a>        <echo level="info" message="To delete all files undeploy the module from Server Registry in Runtime tab and then use Clean again."/>
+<a name="1436"><font size=-1>1436     </font></a>    </target>
+<a name="1437"><font size=-1>1437     </font></a>    <target depends="init" if="netbeans.home" name="undeploy-clean">
+<a name="1438"><font size=-1>1438     </font></a>        <nbundeploy failOnError="false" startServer="false"/>
+<a name="1439"><font size=-1>1439     </font></a>    </target>
+<a name="1440"><font size=-1>1440     </font></a>    <target name="-post-clean">
+<a name="1441"><font size=-1>1441     </font></a>        <!-- Empty placeholder for easier customization. -->
+<a name="1442"><font size=-1>1442     </font></a>        <!-- You can override this target in the ../build.xml file. -->
+<a name="1443"><font size=-1>1443     </font></a>    </target>
+<a name="1444"><font size=-1>1444     </font></a>    <target depends="init,undeploy-clean,deps-clean,do-clean,check-clean,-post-clean" description="Clean build products." name="clean"/>
+<a name="1445"><font size=-1>1445     </font></a>    <target depends="clean" description="Clean build products." name="clean-ear"/>
+<a name="1446"><font size=-1>1446     </font></a></project>
+</pre></body></html>

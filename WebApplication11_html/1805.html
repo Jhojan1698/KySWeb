@@ -1,0 +1,160 @@
+<html><head><title>ant-deploy.xml</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body>
+<h3>File: C:\Users\Segundo\Documents\NetBeansProjects\JSP - Proyecto de carrito de compras\Proyecto - JSP y Mysql - Tienda Online\WebApplication1\nbproject\ant-deploy.xml</h3>
+<SCRIPT>
+ defaultStatus = "File: C:\\Users\\Segundo\\Documents\\NetBeansProjects\\JSP - Proyecto de carrito de compras\\Proyecto - JSP y Mysql - Tienda Online\\WebApplication1\\nbproject\\ant-deploy.xml";
+top.document.title  = "ant-deploy.xml";
+</SCRIPT>
+<pre><a name="1"><font size=-1>1     </font></a><?xml version="1.0" encoding="UTF-8"?>
+<a name="2"><font size=-1>2     </font></a><!--
+<a name="3"><font size=-1>3     </font></a>DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
+<a name="4"><font size=-1>4     </font></a>
+<a name="5"><font size=-1>5     </font></a>Copyright (c) 2008, 2016 Oracle and/or its affiliates. All rights reserved.
+<a name="6"><font size=-1>6     </font></a>
+<a name="7"><font size=-1>7     </font></a>Oracle and Java are registered trademarks of Oracle and/or its affiliates.
+<a name="8"><font size=-1>8     </font></a>Other names may be trademarks of their respective owners.
+<a name="9"><font size=-1>9     </font></a>
+<a name="10"><font size=-1>10     </font></a>The contents of this file are subject to the terms of either the GNU
+<a name="11"><font size=-1>11     </font></a>General Public License Version 2 only ("GPL") or the Common
+<a name="12"><font size=-1>12     </font></a>Development and Distribution License("CDDL") (collectively, the
+<a name="13"><font size=-1>13     </font></a>"License"). You may not use this file except in compliance with the
+<a name="14"><font size=-1>14     </font></a>License. You can obtain a copy of the License at
+<a name="15"><font size=-1>15     </font></a>http://www.netbeans.org/cddl-gplv2.html
+<a name="16"><font size=-1>16     </font></a>or nbbuild/licenses/CDDL-GPL-2-CP. See the License for the
+<a name="17"><font size=-1>17     </font></a>specific language governing permissions and limitations under the
+<a name="18"><font size=-1>18     </font></a>License.  When distributing the software, include this License Header
+<a name="19"><font size=-1>19     </font></a>Notice in each file and include the License file at
+<a name="20"><font size=-1>20     </font></a>nbbuild/licenses/CDDL-GPL-2-CP.  Oracle designates this
+<a name="21"><font size=-1>21     </font></a>particular file as subject to the "Classpath" exception as provided
+<a name="22"><font size=-1>22     </font></a>by Oracle in the GPL Version 2 section of the License file that
+<a name="23"><font size=-1>23     </font></a>accompanied this code. If applicable, add the following below the
+<a name="24"><font size=-1>24     </font></a>License Header, with the fields enclosed by brackets [] replaced by
+<a name="25"><font size=-1>25     </font></a>your own identifying information:
+<a name="26"><font size=-1>26     </font></a>"Portions Copyrighted [year] [name of copyright owner]"
+<a name="27"><font size=-1>27     </font></a>
+<a name="28"><font size=-1>28     </font></a>If you wish your version of this file to be governed by only the CDDL
+<a name="29"><font size=-1>29     </font></a>or only the GPL Version 2, indicate your decision by adding
+<a name="30"><font size=-1>30     </font></a>"[Contributor] elects to include this software in this distribution
+<a name="31"><font size=-1>31     </font></a>under the [CDDL or GPL Version 2] license." If you do not indicate a
+<a name="32"><font size=-1>32     </font></a>single choice of license, a recipient has the option to distribute
+<a name="33"><font size=-1>33     </font></a>your version of this file under either the CDDL, the GPL Version 2 or
+<a name="34"><font size=-1>34     </font></a>to extend the choice of license to its licensees as provided above.
+<a name="35"><font size=-1>35     </font></a>However, if you add GPL Version 2 code and therefore, elected the GPL
+<a name="36"><font size=-1>36     </font></a>Version 2 license, then the option applies only if the new code is
+<a name="37"><font size=-1>37     </font></a>made subject to such option by the copyright holder.
+<a name="38"><font size=-1>38     </font></a>
+<a name="39"><font size=-1>39     </font></a>Contributor(s):
+<a name="40"><font size=-1>40     </font></a>-->
+<a name="41"><font size=-1>41     </font></a><project default="-deploy-ant" basedir=".">
+<a name="42"><font size=-1>42     </font></a>    <target name="-init-cl-deployment-env" if="deploy.ant.enabled">
+<a name="43"><font size=-1>43     </font></a>        <property file="${deploy.ant.properties.file}" />
+<a name="44"><font size=-1>44     </font></a>        <available file="${deploy.ant.docbase.dir}/WEB-INF/sun-web.xml" property="sun.web.present"/>
+<a name="45"><font size=-1>45     </font></a>        <available file="${deploy.ant.docbase.dir}/WEB-INF/glassfish-web.xml" property="glassfish.web.present"/>
+<a name="46"><font size=-1>46     </font></a>        <available file="${deploy.ant.resource.dir}" property="has.setup"/>
+<a name="47"><font size=-1>47     </font></a>        <tempfile prefix="gfv3" property="gfv3.password.file" destdir="${java.io.tmpdir}"/>  <!-- do not forget to delete this! -->
+<a name="48"><font size=-1>48     </font></a>        <echo message="AS_ADMIN_PASSWORD=${gfv3.password}" file="${gfv3.password.file}"/>
+<a name="49"><font size=-1>49     </font></a>    </target>
+<a name="50"><font size=-1>50     </font></a>
+<a name="51"><font size=-1>51     </font></a>    <target name="-parse-sun-web" depends="-init-cl-deployment-env" if="sun.web.present">
+<a name="52"><font size=-1>52     </font></a>        <tempfile prefix="gfv3" property="temp.sun.web" destdir="${java.io.tmpdir}"/>
+<a name="53"><font size=-1>53     </font></a>        <copy file="${deploy.ant.docbase.dir}/WEB-INF/sun-web.xml" tofile="${temp.sun.web}"/>
+<a name="54"><font size=-1>54     </font></a>        <!-- The doctype triggers resolution which can fail -->
+<a name="55"><font size=-1>55     </font></a>        <replace file="${temp.sun.web}">
+<a name="56"><font size=-1>56     </font></a>            <replacetoken><![CDATA[<!DOCTYPE]]></replacetoken>
+<a name="57"><font size=-1>57     </font></a>            <replacevalue><![CDATA[<!-- <!DOCTYPE]]></replacevalue>
+<a name="58"><font size=-1>58     </font></a>        </replace>
+<a name="59"><font size=-1>59     </font></a>        <replace file="${temp.sun.web}">
+<a name="60"><font size=-1>60     </font></a>            <replacetoken><![CDATA[<sun-web-app]]></replacetoken>
+<a name="61"><font size=-1>61     </font></a>            <replacevalue><![CDATA[--> <sun-web-app]]></replacevalue>
+<a name="62"><font size=-1>62     </font></a>        </replace>
+<a name="63"><font size=-1>63     </font></a>        <xmlproperty file="${temp.sun.web}" validate="false">
+<a name="64"><font size=-1>64     </font></a>        </xmlproperty>    
+<a name="65"><font size=-1>65     </font></a>        <delete file="${temp.sun.web}"/>
+<a name="66"><font size=-1>66     </font></a>        <condition property="deploy.ant.client.url" value="${gfv3.url}${sun-web-app.context-root}" else="${gfv3.url}/${ant.project.name}">
+<a name="67"><font size=-1>67     </font></a>            <isset property="sun-web-app.context-root"/>
+<a name="68"><font size=-1>68     </font></a>        </condition>
+<a name="69"><font size=-1>69     </font></a>        <condition property="deploy.context.root.argument" value="&amp;contextroot=${sun-web-app.context-root}" else="/${ant.project.name}">
+<a name="70"><font size=-1>70     </font></a>            <isset property="sun-web-app.context-root"/>
+<a name="71"><font size=-1>71     </font></a>        </condition>
+<a name="72"><font size=-1>72     </font></a>    </target>
+<a name="73"><font size=-1>73     </font></a>    <target name="-parse-glassfish-web" depends="-init-cl-deployment-env" if="glassfish.web.present">
+<a name="74"><font size=-1>74     </font></a>        <tempfile prefix="gfv3" property="temp.gf.web" destdir="${java.io.tmpdir}"/>
+<a name="75"><font size=-1>75     </font></a>        <copy file="${deploy.ant.docbase.dir}/WEB-INF/glassfish-web.xml" tofile="${temp.gf.web}"/>
+<a name="76"><font size=-1>76     </font></a>        <!-- The doctype triggers resolution which can fail -->
+<a name="77"><font size=-1>77     </font></a>        <replace file="${temp.gf.web}">
+<a name="78"><font size=-1>78     </font></a>            <replacetoken><![CDATA[<!DOCTYPE]]></replacetoken>
+<a name="79"><font size=-1>79     </font></a>            <replacevalue><![CDATA[<!-- <!DOCTYPE]]></replacevalue>
+<a name="80"><font size=-1>80     </font></a>        </replace>
+<a name="81"><font size=-1>81     </font></a>        <replace file="${temp.gf.web}">
+<a name="82"><font size=-1>82     </font></a>            <replacetoken><![CDATA[<glassfish-web-app]]></replacetoken>
+<a name="83"><font size=-1>83     </font></a>            <replacevalue><![CDATA[--> <glassfish-web-app]]></replacevalue>
+<a name="84"><font size=-1>84     </font></a>        </replace>
+<a name="85"><font size=-1>85     </font></a>        <xmlproperty file="${temp.gf.web}" validate="false">
+<a name="86"><font size=-1>86     </font></a>        </xmlproperty>
+<a name="87"><font size=-1>87     </font></a>        <delete file="${temp.gf.web}"/>
+<a name="88"><font size=-1>88     </font></a>        <condition property="deploy.ant.client.url" value="${gfv3.url}${glassfish-web-app.context-root}" else="${gfv3.url}/${ant.project.name}">
+<a name="89"><font size=-1>89     </font></a>            <isset property="glassfish-web-app.context-root"/>
+<a name="90"><font size=-1>90     </font></a>        </condition>
+<a name="91"><font size=-1>91     </font></a>        <condition property="deploy.context.root.argument" value="&amp;contextroot=${glassfish-web-app.context-root}" else="/${ant.project.name}">
+<a name="92"><font size=-1>92     </font></a>            <isset property="glassfish-web-app.context-root"/>
+<a name="93"><font size=-1>93     </font></a>        </condition>
+<a name="94"><font size=-1>94     </font></a>    </target>
+<a name="95"><font size=-1>95     </font></a>    <target name="-no-parse-sun-web" depends="-init-cl-deployment-env" unless="sun.web.present">
+<a name="96"><font size=-1>96     </font></a>        <property name="deploy.context.root.argument" value=""/>
+<a name="97"><font size=-1>97     </font></a>    </target>
+<a name="98"><font size=-1>98     </font></a>    <target name="-add-resources" depends="-init-cl-deployment-env" if="has.setup">
+<a name="99"><font size=-1>99     </font></a>        <tempfile prefix="gfv3" property="gfv3.resources.dir" destdir="${java.io.tmpdir}"/>
+<a name="100"><font size=-1>100     </font></a>        <mkdir dir="${gfv3.resources.dir}"/>
+<a name="101"><font size=-1>101     </font></a>        <mkdir dir="${gfv3.resources.dir}/META-INF"/>
+<a name="102"><font size=-1>102     </font></a>        <copy todir="${gfv3.resources.dir}/META-INF">
+<a name="103"><font size=-1>103     </font></a>            <fileset dir="${deploy.ant.resource.dir}"/>
+<a name="104"><font size=-1>104     </font></a>        </copy>
+<a name="105"><font size=-1>105     </font></a>        <jar destfile="${deploy.ant.archive}" update="true">
+<a name="106"><font size=-1>106     </font></a>            <fileset dir="${gfv3.resources.dir}"/>
+<a name="107"><font size=-1>107     </font></a>        </jar>
+<a name="108"><font size=-1>108     </font></a>        <delete dir="${gfv3.resources.dir}"/>
+<a name="109"><font size=-1>109     </font></a>    </target>
+<a name="110"><font size=-1>110     </font></a>    <target name="-deploy-ant" depends="-parse-glassfish-web, -parse-sun-web, -no-parse-sun-web,-add-resources" if="deploy.ant.enabled">
+<a name="111"><font size=-1>111     </font></a>        <antcall target="-deploy-without-pw"/>
+<a name="112"><font size=-1>112     </font></a>        <antcall target="-deploy-with-pw"/>
+<a name="113"><font size=-1>113     </font></a>    </target>
+<a name="114"><font size=-1>114     </font></a>
+<a name="115"><font size=-1>115     </font></a>    <target name="-deploy-without-pw" unless="gfv3.password">
+<a name="116"><font size=-1>116     </font></a>        <echo message="Deploying ${deploy.ant.archive}"/>
+<a name="117"><font size=-1>117     </font></a>        <tempfile prefix="gfv3" property="gfv3.results.file" destdir="${java.io.tmpdir}"/>  <!-- do not forget to delete this! -->
+<a name="118"><font size=-1>118     </font></a>        <property name="full.deploy.ant.archive" location="${deploy.ant.archive}"/>
+<a name="119"><font size=-1>119     </font></a>        <get src="${gfv3.admin.url}/__asadmin/deploy?path=${full.deploy.ant.archive}${deploy.context.root.argument}&amp;force=true&amp;name=${ant.project.name}"
+<a name="120"><font size=-1>120     </font></a>            dest="${gfv3.results.file}"/>
+<a name="121"><font size=-1>121     </font></a>        <delete file="${gfv3.results.file}"/>    
+<a name="122"><font size=-1>122     </font></a>    </target>
+<a name="123"><font size=-1>123     </font></a>    <target name="-deploy-with-pw" if="gfv3.password">
+<a name="124"><font size=-1>124     </font></a>        <echo message="Deploying ${deploy.ant.archive}"/>
+<a name="125"><font size=-1>125     </font></a>        <tempfile prefix="gfv3" property="gfv3.results.file" destdir="${java.io.tmpdir}"/>  <!-- do not forget to delete this! -->
+<a name="126"><font size=-1>126     </font></a>        <property name="full.deploy.ant.archive" location="${deploy.ant.archive}"/>
+<a name="127"><font size=-1>127     </font></a>        <get username="${gfv3.username}" password="${gfv3.password}" src="${gfv3.admin.url}/__asadmin/deploy?path=${full.deploy.ant.archive}${deploy.context.root.argument}&amp;force=true&amp;name=${ant.project.name}"
+<a name="128"><font size=-1>128     </font></a>            dest="${gfv3.results.file}"/>
+<a name="129"><font size=-1>129     </font></a>        <delete file="${gfv3.results.file}"/>
+<a name="130"><font size=-1>130     </font></a>    </target>
+<a name="131"><font size=-1>131     </font></a>    <target name="-undeploy-ant" depends="-init-cl-deployment-env" if="deploy.ant.enabled">
+<a name="132"><font size=-1>132     </font></a>        <antcall target="-undeploy-without-pw"/>
+<a name="133"><font size=-1>133     </font></a>        <antcall target="-undeploy-with-pw"/>
+<a name="134"><font size=-1>134     </font></a>    </target>
+<a name="135"><font size=-1>135     </font></a>
+<a name="136"><font size=-1>136     </font></a>    <target name="-undeploy-without-pw" unless="gfv3.password">
+<a name="137"><font size=-1>137     </font></a>        <echo message="Undeploying ${deploy.ant.archive}"/>
+<a name="138"><font size=-1>138     </font></a>        <tempfile prefix="gfv3" property="gfv3.results.file" destdir="${java.io.tmpdir}"/>  <!-- do not forget to delete this! -->
+<a name="139"><font size=-1>139     </font></a>        <get src="${gfv3.admin.url}/__asadmin/undeploy?name=${ant.project.name}"
+<a name="140"><font size=-1>140     </font></a>            dest="${gfv3.results.file}"/>
+<a name="141"><font size=-1>141     </font></a>        <delete file="${gfv3.results.file}"/>    
+<a name="142"><font size=-1>142     </font></a>    </target>
+<a name="143"><font size=-1>143     </font></a>    <target name="-undeploy-with-pw" if="gfv3.password">
+<a name="144"><font size=-1>144     </font></a>        <echo message="Undeploying ${deploy.ant.archive}"/>
+<a name="145"><font size=-1>145     </font></a>        <tempfile prefix="gfv3" property="gfv3.results.file" destdir="${java.io.tmpdir}"/>  <!-- do not forget to delete this! -->
+<a name="146"><font size=-1>146     </font></a>        <get username="${gfv3.username}" password="${gfv3.password}" src="${gfv3.admin.url}/__asadmin/undeploy?name=${ant.project.name}"
+<a name="147"><font size=-1>147     </font></a>            dest="${gfv3.results.file}"/>
+<a name="148"><font size=-1>148     </font></a>        <delete file="${gfv3.results.file}"/>
+<a name="149"><font size=-1>149     </font></a>    </target>
+<a name="150"><font size=-1>150     </font></a></project>
+</pre></body></html>
